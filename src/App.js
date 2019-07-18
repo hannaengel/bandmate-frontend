@@ -1,4 +1,6 @@
 import React, { Component }from 'react';
+import {BrowserRouter as Router,Link, Route} from 'react-router-dom';
+
 import './App.css';
 import Facebook from './components/Facebook';
 import FilterContainer from './components/FilterContainer';
@@ -34,9 +36,27 @@ class App extends Component {
   }
   render(){
     return (
+
+      <Router>
       <div>
-        <CreateBandForm getProfile={this.getProfile}/>
+        <ul>
+          <li><Link to="/band/new">Band Create Page</Link></li>
+          <li><Link to="/musician/login">Musician Login</Link></li>
+          <li><Link to="/home">Landing Page</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/filter">Filter Container</Link></li>
+        </ul>
+        <Route path="/band/new" render={()=><CreateBandForm getProfile={this.getProfile}/>}/>
+        <Route path="/home" component={LandingPage}/>
+        <Route path="/login" component={Login}/>
+        <Route path="/filter" component={FilterContainer}/>
+        <Route path="/musician/login" component={Facebook}/>
+      
       </div>
+    </Router>
+      
+        // <CreateBandForm getProfile={this.getProfile}/>
+      
     );
   }
 }

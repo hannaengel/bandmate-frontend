@@ -20,10 +20,13 @@
   padding-top: 30%;
 }
 
-body {
+/* body {
   background-image: url("images/background.jpg") !important;
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+} */
+body {
+  background-color: pink !important;
 }

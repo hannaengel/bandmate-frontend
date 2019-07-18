@@ -11,6 +11,7 @@ class Api::V1::BandsController < ApplicationController
       @band = Band.create(band_params)
       if @band
         @token = encode_token(band_id: @band.id)
+        debugger
         render json: { band: @band, jwt: @token }, status: :created
       else
         render json: { error: 'failed to create band' }, status: :not_acceptable

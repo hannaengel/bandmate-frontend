@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
     before_action :authorized
    
     def encode_token(payload)
-      # should store secret in env variable
+      debugger
       JWT.encode(payload, 'my_s3cr3t')
     end
    
