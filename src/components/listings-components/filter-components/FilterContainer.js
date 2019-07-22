@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
-import InstrumentFilter from './filter-components/InstrumentFilter'
+import InstrumentFilter from './InstrumentFilter'
+
 
 export default class FilterContainer extends Component {
 
-//state here
     render() {
+        const listings = this.props.listings
         return( 
-            <div>
+            <React.Fragment>
                 <div class="ui vertical menu">
 
-                    <a class="item">
+                    <a class="active teal item">
                         <h4 class="ui header">Filter</h4>
                     </a>
 
@@ -19,7 +20,7 @@ export default class FilterContainer extends Component {
                      
                     <InstrumentFilter />
                  </div>
-            </div>
+             </React.Fragment>
         )
     }
 }

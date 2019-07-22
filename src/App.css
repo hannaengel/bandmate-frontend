@@ -27,6 +27,19 @@
   background-repeat: no-repeat;
   background-size: cover;
 } */
-body {
-  background-color: pink !important;
+
+
+.band-display-image{
+  width: 100px !important;
+}
+
+img{ max-width:100%;
+}
+
+.band-profile-div{
+  padding: 50px;
+}
+
+body{
+  background-color: lightblue !important;
 }

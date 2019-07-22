@@ -1,6 +1,6 @@
 import React, { Component} from 'react'
-import { Button, Form, Grid, Header } from 'semantic-ui-react'
-import BandDisplayPage from './BandDisplayPage'
+import { Button, Form, Grid } from 'semantic-ui-react'
+import BandDisplayContainer from '../BandDisplayContainer'
 
 export default class CreateBandForm extends Component {
 
@@ -18,6 +18,7 @@ export default class CreateBandForm extends Component {
             soundcloud: null,
             instagram: null,
             facebook: null,
+            image_url: null
         }
         };
     }
@@ -31,7 +32,7 @@ export default class CreateBandForm extends Component {
     }
 
     handleSpotify = event => {
-        const widget = `<iframe src="${event.target.value}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`
+        const widget = event.target.value
         this.setState(prevState => ({
             spotify: widget
         }), ()=> console.log(this.state))
@@ -169,7 +170,7 @@ export default class CreateBandForm extends Component {
                             <label >
                                 <i class="spotify icon"></i>
                                 Spotify </label>
-                            <input type="text" placeholder='paste spotify share link here' name='spotify' />
+                            <input type="text" placeholder='spotify embed link here' name='spotify' />
                          </Form.Field>
 
                          <Form.Field  onChange={this.handleSoundcloud}>
@@ -188,7 +189,7 @@ export default class CreateBandForm extends Component {
                         </Form.Field>
                     </Form>
                 </Grid>
-                <BandDisplayPage bandInfo={this.state.band}/>
+                {/* <BandDisplayContainer bandInfo={this.state.band}/> */}
             </div>
         )
     }
