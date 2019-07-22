@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_18_004225) do
+ActiveRecord::Schema.define(version: 2019_07_22_210908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,13 +23,40 @@ ActiveRecord::Schema.define(version: 2019_07_18_004225) do
     t.string "instruments"
     t.string "spotify"
     t.string "soundcloud"
-    t.string "instragram"
+    t.string "instagram"
     t.string "facebook"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "band", default: true
     t.string "username"
     t.string "password_digest"
+    t.string "bio"
+  end
+
+  create_table "listings", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.string "instruments"
+    t.integer "band_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "musicians", force: :cascade do |t|
+    t.string "name"
+    t.string "username"
+    t.string "password"
+    t.string "email"
+    t.string "image_url"
+    t.string "bio"
+    t.string "soundcloud"
+    t.string "spotify"
+    t.string "instruments"
+    t.string "genres"
+    t.string "facebook"
+    t.string "instagram"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

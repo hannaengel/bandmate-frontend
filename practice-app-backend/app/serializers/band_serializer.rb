@@ -1,3 +1,3 @@
 class BandSerializer < ActiveModel::Serializer
-  attributes :username, :password, :band
+  attributes :id, :name, :username, :email, :image_url, :bio, :soundcloud, :spotify, :instruments, :genres, :facebook, :instagram
 end

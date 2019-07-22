@@ -10,6 +10,7 @@ import CreateBandForm from './components/logincomponents/CreateBandForm';
 import BandDisplayContainer from './components/BandDisplayContainer';
 import ListingsPageContainer from './components/ListingsPageContainer';
 import MuscianDisplayContainer from './components/MusicianDisplayContainer';
+import CreateListingForm  from './components/CreateListingForm';
 import Navbar from './components/NavBar'
 
 
@@ -26,19 +27,19 @@ class App extends Component {
       token: ["token_hash, user, expiration (datetimestamp)"] // dictionary, not list
     };
   }
-  getProfile = () => {
-    let token = localStorage.getItem("jwt")
-    console.log(token)
-    fetch('http://localhost:3000/api/v1/profile', {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    })
-    .then(res=>res.json())
-    .then(json=> {
-      console.log('Json Band', json.band)
-    })
-  }
+  // getProfile = () => {
+  //   let token = localStorage.getItem("jwt")
+  //   console.log(token)
+  //   fetch('http://localhost:3000/api/v1/profile', {
+  //     headers: {
+  //       'Authorization': 'Bearer ' + token
+  //     }
+  //   })
+  //   .then(res=>res.json())
+  //   .then(json=> {
+  //     console.log('Json Band', json.band)
+  //   })
+  // }
   render(){
     return (
 
@@ -60,6 +61,7 @@ class App extends Component {
         <Route path="/musician/login" component={Facebook}/>
         <Route path="/listings" component={ListingsPageContainer}/>
         <Route path="/musician/show" component={MuscianDisplayContainer}/>
+        <Route path="/listing/new" component={CreateListingForm}/>
       
       </div>
     </Router>

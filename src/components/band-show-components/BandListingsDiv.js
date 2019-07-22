@@ -9,7 +9,7 @@ export default class BandListingsDiv extends Component {
             <div class="ui segment"> 
                 <h2>Current Listings</h2>
                 <div class="ui divider"></div>
-                <ListingAccordian />
+                <ListingAccordian listings={this.props.listings} />
             </div>
         )
     }

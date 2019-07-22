@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 import { Button, Icon, Grid, Form} from 'semantic-ui-react'
-import ListingAccordian from './listings-components/ListingAccordian.js'
 import NavBar from './NavBar.js'
 import BandPhoto from './band-show-components/BandPhoto'
 import BandPhotoEdit from './band-show-components/BandPhotoEdit'
@@ -34,7 +33,19 @@ export default class BandDisplayContainer extends Component {
             editView: false
         }
         };
+        this.fetchListings()
     }
+
+    fetchListings = () =>{
+        console.log('in fetch listings')
+
+          fetch('http://localhost:3000/api/v1/listings')
+              .then(res=>res.json())
+              .then(data => {this.setState(prevState => ({
+                    listings: data
+                }), ()=> console.log(this.state.band.listings))}
+            );
+      }
     
 
     handleClick = event => {

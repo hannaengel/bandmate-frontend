@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      resources :listings, only: [:create, :index, :update]
       resources :bands, only: [:create, :index, :update]
+      resources :musicians, only: [:create, :index, :update]
       post '/login', to: 'auth#create'
-      get '/profile', to: 'bands#profile'
-      get '/bands', to: 'bands#index'
-     
+      get 'bands/profile', to: 'bands#profile'
+      get 'musicians/profile', to: 'musicians#profile'
+      
     end
   end
 end

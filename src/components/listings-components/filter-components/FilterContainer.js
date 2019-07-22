@@ -5,10 +5,10 @@ import InstrumentFilter from './InstrumentFilter'
 export default class FilterContainer extends Component {
 
     render() {
-        const listings = this.props.listings
         return( 
             <React.Fragment>
-                <div class="ui vertical menu">
+                <section>
+                <div class="ui large vertical menu">
 
                     <a class="active teal item">
                         <h4 class="ui header">Filter</h4>
@@ -20,6 +20,7 @@ export default class FilterContainer extends Component {
                      
                     <InstrumentFilter />
                  </div>
+                 </section>
              </React.Fragment>
         )
     }

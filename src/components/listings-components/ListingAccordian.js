@@ -12,41 +12,42 @@ export default class ListingAccordian extends Component {
     this.setState({ activeIndex: newIndex })
   }
 
+  handleContact = listing => {
+    console.log('contact')
+      console.log(listing)
+       let email = listing.band.email
+       let body_text = `Hello ${listing.band.name},%0D%0A%0D%0ASincerely,%0D%0AMusician`
+
+       window.location.href = `mailto:${email}?subject=I Am Interested In Your Posting on BandMate!&body=${body_text}`;
+    }
+
   render() {
     const { activeIndex } = this.state
     const listings = this.props.listings
 
     return (
       <Accordion styled>
-        <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
-          <Icon name='dropdown' />
-         Listing 
-        </Accordion.Title>
-        <Accordion.Content active={activeIndex === 0}>
-          <p>
-           description
-          </p>
-        </Accordion.Content>
 
-        <Accordion.Title active={activeIndex === 1} index={1} onClick={this.handleClick}>
-          <Icon name='dropdown' />
-          Listing
-         </Accordion.Title>
-        <Accordion.Content active={activeIndex === 1}>
-          <p>
-            description
-          </p>
-        </Accordion.Content>
-
-        <Accordion.Title active={activeIndex === 2} index={2} onClick={this.handleClick}>
-          <Icon name='dropdown' />
-          Listing
-        </Accordion.Title>
-        <Accordion.Content active={activeIndex === 2}>
-          <p>
-            description
-          </p>
-        </Accordion.Content>
+        {listings.map((listing, index) => {
+          return (
+          <React.Fragment>
+             <Accordion.Title active={activeIndex === index} index={index} onClick={this.handleClick}>
+                <Icon name='dropdown' />
+               {listing.title}
+              </Accordion.Title>
+              <Accordion.Content active={activeIndex === index}>
+                <section>
+                <p>{`Host:   ${listing.band? listing.band.name: 'no band'}`} </p>
+                <p>{`Instruments:   ${listing.instruments}`} </p>
+                <p>{`Description:   ${listing.description}`} </p>
+                <button onClick={()=>{this.handleContact(listing)}} class="ui primary basic button">Contact</button>
+                {/* <button onClick={()=>{this.handleUpdate(listing)}} class="ui pink basic button">Edit Listing</button> */}
+        
+                </section>
+              </Accordion.Content>
+          </React.Fragment>
+        )})}
+       
       </Accordion>
     )
   }

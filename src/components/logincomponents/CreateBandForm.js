@@ -13,7 +13,7 @@ export default class CreateBandForm extends Component {
             password: null,
             name: null,
             instruments: null,
-            genre: null,
+            genres: null,
             spotify: null,
             soundcloud: null,
             instagram: null,
@@ -49,7 +49,7 @@ export default class CreateBandForm extends Component {
     createUser = () =>{
         const URL = 'http://localhost:3000/api/v1/bands'
         const band = this.state.band
-        console.log('band', band)
+        console.log('inside create user, here is the state:', band)
         const headers = {
             method: 'POST',
             headers: {
@@ -61,10 +61,11 @@ export default class CreateBandForm extends Component {
         fetch(URL, headers)
             .then(res=>res.json())
             .then(data => {
-            console.log('JWT', data.jwt, 'Data', data)
-            const token =  data.jwt
-            localStorage.setItem('jwt', token);
-            this.props.getProfile()
+            // console.log('JWT', data.jwt, 'Data', data)
+            // const token =  data.jwt
+            // localStorage.setItem('jwt', token);
+             console.log( 'Data', data)
+            // this.props.getProfile()
         })
            
     }
@@ -79,7 +80,9 @@ export default class CreateBandForm extends Component {
         return(
             <div>
                  <Grid centered columns={2} padded='vertically'>
+                     
                     <Form className='create-user-form'>
+                    <div className='column'>
                         <h2 className="ui center aligned icon header">
                         <i className="circular user icon"></i>
                         Create Band Account
@@ -96,7 +99,10 @@ export default class CreateBandForm extends Component {
                         </Form.Field>
 
                         <h1 className='ui dividing header'></h1>
-
+                        
+                        </div>
+                        <div className='column'>
+                       
                         <Form.Field  onChange={this.handleChange}>
                         <label>Band Name</label>
                         <input name='name' placeholder='name' required/>
@@ -111,10 +117,9 @@ export default class CreateBandForm extends Component {
                             <label >
                                 <i class="file upload icon"></i>
                                 Band Photo URL</label>
-                            <input type="text" placeholder='paste image url here' name='img_url' />
+                            <input type="text" placeholder='paste image url here' name='image_url' />
                          </Form.Field>
-
-                
+                        </div>
 
                          
 
@@ -133,7 +138,7 @@ export default class CreateBandForm extends Component {
                             </div>
                         </Form.Field> 
 
-                        <Form.Field id='genre'>
+                        <Form.Field id='genres'>
                             <div class="field">
                             <label>Genre</label>
                             <select multiple="" class="ui dropdown">
