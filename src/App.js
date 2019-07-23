@@ -11,6 +11,7 @@ import BandDisplayContainer from './components/BandDisplayContainer';
 import ListingsPageContainer from './components/ListingsPageContainer';
 import MuscianDisplayContainer from './components/MusicianDisplayContainer';
 import CreateListingForm  from './components/CreateListingForm';
+import CreateMusicianForm  from './components/CreateMusicianForm';
 import Navbar from './components/NavBar'
 
 
@@ -62,6 +63,8 @@ class App extends Component {
         <Route path="/listings" component={ListingsPageContainer}/>
         <Route path="/musician/show" component={MuscianDisplayContainer}/>
         <Route path="/listing/new" component={CreateListingForm}/>
+        <Route path="/musicians/new" component={CreateMusicianForm}/>
+
       
       </div>
     </Router>

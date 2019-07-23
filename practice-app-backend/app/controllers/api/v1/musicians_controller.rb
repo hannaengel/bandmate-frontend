@@ -35,7 +35,7 @@ class Api::V1::MusiciansController < ApplicationController
       private
 
       def musician_params
-        params.require(:musician).permit!
+        params.require(:musician).permit(:id, :username, :password, :email, :name, :instruments, :genres, :spotify, :soundcloud, :instagram, :facebook, :image_url)
       end
 
     end

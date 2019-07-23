@@ -9,7 +9,7 @@ export default class BandListingsDiv extends Component {
             <div class="ui segment"> 
                 <h2>Current Listings</h2>
                 <div class="ui divider"></div>
-                <BandListingsAccordian listings={this.props.listings} />
+                <BandListingsAccordian onDelete={this.props.onDelete} editView={this.props.editView} listings={this.props.listings} band={this.props.band} />
             </div>
         )
     }

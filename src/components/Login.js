@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import CreateBandForm from './CreateBandForm.js'
+import Facebook from './Facebook.js';
+import NavBar from './NavBar'
 
 
 export default class Login extends Component {
@@ -8,7 +10,8 @@ export default class Login extends Component {
     render() {
         return( 
             <div>
-                <CreateBandForm />
+                <NavBar />
+                <Facebook />
             </div>
         )
     }

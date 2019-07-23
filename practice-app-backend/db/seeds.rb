@@ -86,10 +86,59 @@ listings = [
     } 
 ]
 
+listings = [{
+    name: 'Hanna',
+    username: 'hannaengel',
+    email: 'hengel@gmail.com',
+    image_url: 'https://sa.kapamilya.com/absnews/abscbnnews/media/2018/tvpatrol/02/27/kz.jpg',
+    bio: 'I love music gurlllll!',
+    soundcloud: '<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/365733104&color=%2326eb1f&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>',
+    instruments : 'voice',
+    genre: 'pop',
+    facebook: 'https://www.facebook.com/hanna.engel.92?ref=bookmarks',
+    instagram: 'https://www.instagram.com/hannakahh/?hl=en',
+    spotify: '<iframe src="https://open.spotify.com/embed/artist/6LuN9FCkKOj5PcnpouEgny" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>'        
+},
+{
+    name: 'Leah',
+    username: 'leahengel',
+    email: 'hengel@gmail.com',
+    image_url: 'https://www.billboard.com/files/styles/article_main_image/public/media/Rayvon-Owen-2017-billboard-1548.jpg',
+    bio: 'I love music gurlllll!',
+    soundcloud: '<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/365733104&color=%2326eb1f&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>',
+    instruments : 'voice',
+    genre: 'pop',
+    facebook: 'https://www.facebook.com/hanna.engel.92?ref=bookmarks',
+    instagram: 'https://www.instagram.com/hannakahh/?hl=en',
+    spotify: '<iframe src="https://open.spotify.com/embed/artist/6LuN9FCkKOj5PcnpouEgny" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>'        
+},
+{
+    name: 'Monkey',
+    username: 'monkeyengel',
+    email: 'hengel@gmail.com',
+    image_url: 'https://www.liveabout.com/thmb/nKfdQ82K9xQi7sqmHHE_udp_jLQ=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/one-voice--somos-live--a-concert-for-disaster-relief---los-angeles-861409954-59f0cf876f53ba001113dfb9.jpg',
+    bio: 'I love music gurlllll!',
+    soundcloud: '<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/365733104&color=%2326eb1f&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>',
+    instruments : 'voice',
+    genre: 'pop',
+    facebook: 'https://www.facebook.com/hanna.engel.92?ref=bookmarks',
+    instagram: 'https://www.instagram.com/hannakahh/?hl=en',
+    spotify: '<iframe src="https://open.spotify.com/embed/artist/6LuN9FCkKOj5PcnpouEgny" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>'        
+}]
+
+
+
+
+
 bands.each do |band|
     Band.create(band)
 end
 
 listings.each do |listing|
     Listing.create(listing)
+end
+
+
+musicians.each do |musician|
+    Musician.create(musician)
 end

@@ -27,11 +27,18 @@ class Api::V1::ListingsController < ApplicationController
         end
       end
 
+    
+      def destroy
+        @listing = Listing.find(params[:id])
+        @listing.destroy
+        render json: Listing.all
+    end
+    
   
       private
 
       def listing_params
-        params.require(:listing).permit(:band_id, :description, :title, :instruments)
+        params.require(:listing).permit(:id, :band_id, :description, :title, :instruments)
       end
 
     end

@@ -42,11 +42,13 @@ export default class NavBar extends Component {
     render() {
         return(
             <div >
-               <div className="ui eight fluid item top attached menu borderless">
+               <div className="ui nine fluid item top attached menu borderless">
                 <div className="item">
 
                 <div className="item nav_link">
+                <NavLink to="/home" activeClassName="hurray">
                 <img src={logo} alt='' />
+                </NavLink>
                 </div>
                 </div>
 
@@ -77,6 +79,12 @@ export default class NavBar extends Component {
                 <div className='item'>
                 <NavLink to="/band/new" activeClassName="hurray">
                   Create Band
+                </NavLink>
+                </div>
+
+                <div className='item'>
+                <NavLink to="/musicians/new" activeClassName="hurray">
+                  Create Musician
                 </NavLink>
                 </div>
                 

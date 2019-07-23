@@ -25,6 +25,7 @@ class Api::V1::BandsController < ApplicationController
 
     def update
       @band = Band.find(band_params[:id])
+      @band.update(band_params)
       if @band.update(band_params)
         render json: @band
       else
@@ -34,7 +35,7 @@ class Api::V1::BandsController < ApplicationController
 
     private
     def band_params
-      params.require(:band).permit(:username, :password, :email, :name, :instruments, :genres, :spotify, :soundcloud, :instagram, :facebook, :image_url, :band)
+      params.require(:band).permit(:id, :username, :password, :email, :name, :instruments, :genres, :spotify, :soundcloud, :instagram, :facebook, :image_url, :band)
     end
   end
   

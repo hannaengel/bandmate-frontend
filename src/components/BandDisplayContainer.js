@@ -14,6 +14,7 @@ export default class BandDisplayContainer extends Component {
         super();
         this.state = {
             band: {
+            id: '',
             username: '',
             email: '',
             name: '',
@@ -50,7 +51,7 @@ export default class BandDisplayContainer extends Component {
         window.open(this.state.band.facebook, '_blank');
     }
 
-    handleEditClick = event =>{
+    handleEditClick = () =>{
         this.setState(prevState => ({
             viewMode: {editView: !prevState.viewMode.editView}
         }))
@@ -64,15 +65,49 @@ export default class BandDisplayContainer extends Component {
         }), ()=> console.log(this.state.band))
     }
 
-    handleSubmit = event =>{
-        event.preventDefault();
-        event.persist();
-        this.handleEditClick(event);
-        console.log('SUBMIT', this.state.band)
+
+    handleSubmit = e => {
+        e.preventDefault();
+        this.handleEditClick();
+        console.log('inside handle edit submit')
+        const id = this.state.band.id
+        const url = `http://localhost:3000/api/v1/bands/${id}`
+        const band = this.state.band
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+             band
+            })
+        })
+      .then(res=>res.json())
+      .then(json => {
+        console.log(json)
+      })
     }
 
+    removeListing = (listing) => {
+        console.log('in remove listing')
+        const id = listing.id
+        const url =`http://localhost:3000/api/v1/listings/${id}`
+        console.log(url, id)
+        fetch(url, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }})
+        .then(res=>res.json())
+        .then(json => {
+          console.log('REMOVED Listing', json)
+        })     
+    }
+
+
+
     render() {
-        const {facebook, instagram, name, email, instruments, genre, image_url, spotify, soundcloud} = this.state.band
+        const {facebook, instagram, bio, name, email, instruments, genre, image_url, spotify, soundcloud} = this.state.band
        
         return( 
          
@@ -82,7 +117,7 @@ export default class BandDisplayContainer extends Component {
 
                 {this.state.viewMode.editView==false? 
                 <button className='ui green button' onClick={this.handleEditClick}> Click to Edit </button> :
-                <button className ='ui submit button' onClick={this.handleEditClick}> Submit Edits </button>}
+                <button className ='ui submit button' onClick={this.handleSubmit}> Submit Edits </button>}
                 <div className='band-profile-div'>
                 <div class="ui relaxed grid">
                     <Grid.Row stretched>
@@ -91,13 +126,8 @@ export default class BandDisplayContainer extends Component {
                         {this.state.viewMode.editView===false?
                             <BandPhoto image_url={this.state.band.image_url}/>:
                             <React.Fragment>
-                            <BandPhoto image_url={this.state.band.image_url}/>
-                            <Form.Field  onChange={this.handleChange}>
-                            <label >
-                                <i class="file upload icon"></i>
-                                Band Photo URL</label>
-                            <input type="text" placeholder={image_url} name='img_url' />
-                            </Form.Field>
+                               <BandPhoto image_url={this.state.band.image_url}/>
+                            
                             </React.Fragment>}
 
                         </div>
@@ -108,6 +138,10 @@ export default class BandDisplayContainer extends Component {
                             <Form.Field  onChange={this.handleChange}>
                                 <label>Band Name</label>
                                 <input name='name' placeholder={name}/>
+                            </Form.Field>
+                            <Form.Field  onChange={this.handleChange}>
+                                <label>Bio</label>
+                                <input bio='bio' placeholder={bio}/>
                             </Form.Field>
                             <Form.Field  onChange={this.handleChange}>
                                 <label>Email Contact</label>
@@ -131,35 +165,46 @@ export default class BandDisplayContainer extends Component {
                         </div>
 
                      </Grid.Row>
-
+                     {this.state.viewMode.editView===false?
                      <Grid.Row stretched>
                         <div class="six wide column">
-                        {this.state.viewMode.editView===false?
-                            <Spotify spotify={spotify} />:
-                            <Form.Field  onChange={this.handleChange}>
-                            <label >
-                                <i class="spotify icon"></i>
-                                Spotify </label>
-                            <input type="text" placeholder={spotify}  name='spotify' />
-                         </Form.Field>
-                        }
+                            <Spotify spotify={spotify} />
                         </div>
                         <div class="four wide column">  
-                        {this.state.viewMode.editView===false?       
-                            <Soundcloud soundcloud={soundcloud}/>:
-                            <Form.Field  onChange={this.handleChange}>
-                            <label >
-                                <i class="soundcloud icon"></i>
-                                Soundcloud </label>
-                            <input type="text" placeholder={soundcloud} name='soundcloud' />
-                         </Form.Field>}
+                            <Soundcloud soundcloud={soundcloud}/>
                         </div>
                         <div class="six wide column">
-                        {this.state.viewMode.editView===false?
-                           <BandListingsDiv listings={this.state.band.listings} />:
-                           <div>Edit Listings Component here</div>}
+                           <BandListingsDiv onDelete={this.removeListing} editView={this.state.viewMode.editView} band={this.state.band} listings={this.state.band.listings} />
                         </div>
-                    </Grid.Row>
+                    </Grid.Row>: 
+                    <Grid.Row stretched>
+                        
+                            <div class="six wide column">
+                                <Form.Field  onChange={this.handleChange}>
+                                <label >
+                                    <i class="file upload icon"></i>
+                                    Band Photo URL</label>
+                                <input type="text" placeholder={image_url} name='img_url' />
+                                </Form.Field>
+                                <Form.Field  onChange={this.handleChange}>
+                                <label >
+                                    <i class="spotify icon"></i>
+                                    Spotify </label>
+                                <input type="text" placeholder={spotify}  name='spotify' />
+                            </Form.Field>
+                           
+                                <Form.Field  onChange={this.handleChange}>
+                                <label >
+                                    <i class="soundcloud icon"></i>
+                                    Soundcloud </label>
+                                <input type="text" placeholder={soundcloud} name='soundcloud' />
+                            </Form.Field>
+                            </div>
+                        <div class="ten wide column">
+                           <BandListingsDiv onDelete={this.removeListing} editView={this.state.viewMode.editView} band={this.state.band} listings={this.state.band.listings} />
+                        </div>
+                    </Grid.Row>}
+                
                 </div>
                 </div> 
                 </form>

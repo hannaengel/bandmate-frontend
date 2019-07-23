@@ -14,25 +14,37 @@ export default class BandDisplayContainer extends Component {
         super();
         this.state = {
             musician: {
-                name: 'Hanna',
-                username: 'hannaengel',
-                email: 'hengel@gmail.com',
-                image_url: 'https://sa.kapamilya.com/absnews/abscbnnews/media/2018/tvpatrol/02/27/kz.jpg',
-                bio: 'I love music gurlllll!',
-                soundcloud: '<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/365733104&color=%2326eb1f&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>',
-                instruments : 'voice',
-                genre: 'pop',
-                facebook: 'https://www.facebook.com/hanna.engel.92?ref=bookmarks',
-                instagram: 'https://www.instagram.com/hannakahh/?hl=en',
-                spotify: '<iframe src="https://open.spotify.com/embed/artist/6LuN9FCkKOj5PcnpouEgny" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>'        
+                id: '',
+                name: '',
+                username: '',
+                email: '',
+                image_url: '',
+                bio: '',
+                soundcloud: '',
+                instruments : '',
+                genre: '',
+                facebook: '',
+                instagram: '',
+                spotify: ''        
         },
 
         viewMode: {
             editView: false
         }
         };
+        this.fetchMusicians()
     }
     
+    fetchMusicians = () =>{
+        console.log('in fetch musicians')
+
+          fetch('http://localhost:3000/api/v1/musicians')
+              .then(res=>res.json())
+              .then(data => {this.setState(prevState => ({
+                    musician: data[2]
+                }), ()=> console.log(this.state.musician))}
+            );
+      }
 
     handleClick = event => {
         event.target.name==='instagram'? 
@@ -47,12 +59,28 @@ export default class BandDisplayContainer extends Component {
         
     }
 
-    handleSubmit = event =>{
-        event.preventDefault();
-        event.persist();
-        this.handleEditClick(event);
-        console.log('SUBMIT')
+    handleSubmit = e => {
+        e.preventDefault();
+        this.handleEditClick();
+        console.log('inside handle edit submit')
+        const id = this.state.musician.id
+        const url = `http://localhost:3000/api/v1/musicians/${id}`
+        const musician = this.state.musician
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+             musician
+            })
+        })
+      .then(res=>res.json())
+      .then(json => {
+        console.log(json)
+      })
     }
+
 
     handleChange = event => {
         let name = event.target.name
@@ -87,7 +115,7 @@ export default class BandDisplayContainer extends Component {
                             <label >
                                 <i className="file upload icon"></i>
                                 Band Photo URL</label>
-                            <input type="text" placeholder={image_url} name='img_url' />
+                            <input type="text" placeholder={image_url} name='image_url' />
                             </Form.Field>
                             </React.Fragment>}
 
@@ -97,7 +125,7 @@ export default class BandDisplayContainer extends Component {
                             <Bio band={this.state.musician} onClick={this.handleClick}/>:
                             <React.Fragment>
                             <Form.Field  onChange={this.handleChange}>
-                                <label>Band Name</label>
+                                <label>Name</label>
                                 <input name='name' placeholder={name}/>
                             </Form.Field>
                             <Form.Field  onChange={this.handleChange}>
