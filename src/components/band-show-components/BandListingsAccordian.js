@@ -51,6 +51,7 @@ export default class BandListingsAccordian extends Component {
       updateListing = (e, listing)  =>{
         e.preventDefault();
         const id = listing.id
+        const updateListing = this.state.listings[this.state.activeIndex]
         const url = `http://localhost:3000/api/v1/listings/${id}`
            fetch(url, {
             method: 'PUT',
@@ -58,7 +59,7 @@ export default class BandListingsAccordian extends Component {
             'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-            listing
+            listing: updateListing
             })
         })
       .then(res=>res.json())
