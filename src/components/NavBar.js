@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import logo from '../images/logo.png'
-
+import { NavLink } from 'react-router-dom'
 
 export default class NavBar extends Component {
 
@@ -42,31 +42,54 @@ export default class NavBar extends Component {
     render() {
         return(
             <div >
-               <div className="ui seven fluid item top attached menu borderless">
+               <div className="ui eight fluid item top attached menu borderless">
                 <div className="item">
 
-                <div className="item" href="http://localhost:3001/browse">
-                <img src={logo} />
+                <div className="item nav_link">
+                <img src={logo} alt='' />
                 </div>
                 </div>
 
-                <a href="http://localhost:3001/liked" className="item">
-                Listings
-                </a>
-                <a className='item'></a>
-              <a className='item bark-font'>
-                <h2 className='bark-font'>                 </h2>
-              </a>
-              <a className='item'></a>
+                <div className='item'>
+                <NavLink to="/musician/show" activeClassName="hurray">
+                  Musician Profile
+                </NavLink>
+                </div>
+
+                <div className='item'>
+                <NavLink to="/band/show" >
+                  Band Profile
+                </NavLink>
+                </div>
+
+                <div className='item'>
+                <NavLink to="/listings" activeClassName="hurray">
+                  Listings
+                </NavLink>
+                </div>
+
+                <div className='item'>
+                <NavLink to="/listing/new" activeClassName="hurray">
+                  Create Listing
+                </NavLink>
+                </div>
+
+                <div className='item'>
+                <NavLink to="/band/new" activeClassName="hurray">
+                  Create Band
+                </NavLink>
+                </div>
                 
-                <a href="http://localhost:3001/profile" className="item">
+           
+      
+               <div  className="item">
                 <i className='user icon'></i>
-                  {this.state.username}
-                </a>
+                  current user
+                </div>
+
                 <div className="item">
                 <div onClick={this.logout} className="ui button">Log Out</div>
-           
-            </div>
+               </div>
             </div>
 
 

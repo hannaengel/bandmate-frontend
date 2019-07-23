@@ -14,20 +14,18 @@ export default class BandDisplayContainer extends Component {
         super();
         this.state = {
             band: {
-            isBand: false,
-            username: null,
-            email: 'lakestreetdive@band.com',
-            password: null,
-            name: 'Lake Street Dive',
-            instruments: 'drums, guitar, voice, bass',
-            genre: 'soul',
-            spotify: '<iframe src="https://open.spotify.com/embed/artist/3nuc29fYGlQbIrwh4yrNWd" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
-            soundcloud: '<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/200556914&color=%2334919e&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>',
-            instagram: 'https://www.instagram.com/lakestreetdive/',
-            facebook: 'https://www.facebook.com/lakestreetdive/?ref=br_rs',
-            image_url: 'https://live.staticflickr.com/5484/30138010132_f47ff6def1_b.jpg',
+            username: '',
+            email: '',
+            name: '',
+            instruments: '',
+            genre: '',
+            spotify: '',
+            soundcloud: '',
+            instagram: '',
+            facebook: '',
+            image_url: '',
             listings: [],
-            bio: 'Best Band Ever'
+            bio: ''
         },
         viewMode: {
             editView: false
@@ -35,18 +33,16 @@ export default class BandDisplayContainer extends Component {
         };
         this.fetchListings()
     }
-
     fetchListings = () =>{
-        console.log('in fetch listings')
+        console.log('in fetch bands')
 
-          fetch('http://localhost:3000/api/v1/listings')
+          fetch('http://localhost:3000/api/v1/bands')
               .then(res=>res.json())
               .then(data => {this.setState(prevState => ({
-                    listings: data
-                }), ()=> console.log(this.state.band.listings))}
+                    band: data[2]
+                }), ()=> console.log(this.state.band))}
             );
       }
-    
 
     handleClick = event => {
         event.target.name==='instagram'? 

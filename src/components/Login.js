@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CreateBandForm from './logincomponents/CreateBandForm'
+import CreateBandForm from './CreateBandForm.js'
 
 
 export default class Login extends Component {

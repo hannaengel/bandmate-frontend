@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ListingAccordian from '../listings-components/ListingAccordian'
+import BandListingsAccordian from './BandListingsAccordian.js'
 
 export default class BandListingsDiv extends Component {
 
@@ -9,7 +9,7 @@ export default class BandListingsDiv extends Component {
             <div class="ui segment"> 
                 <h2>Current Listings</h2>
                 <div class="ui divider"></div>
-                <ListingAccordian listings={this.props.listings} />
+                <BandListingsAccordian listings={this.props.listings} />
             </div>
         )
     }

@@ -20,6 +20,14 @@
   padding-top: 30%;
 }
 
+.nav_link:link {
+  color: black;
+  font-size: 1.3rem;
+  line-height: 1.srem;
+  text-decoration: none;
+}
+
+
 /* body {
   background-image: url("images/background.jpg") !important;
   height: 100%;

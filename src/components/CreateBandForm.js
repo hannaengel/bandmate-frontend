@@ -1,6 +1,6 @@
 import React, { Component} from 'react'
 import { Button, Form, Grid } from 'semantic-ui-react'
-import BandDisplayContainer from '../BandDisplayContainer'
+import NavBar from './NavBar'
 
 export default class CreateBandForm extends Component {
 
@@ -79,6 +79,7 @@ export default class CreateBandForm extends Component {
 
         return(
             <div>
+                <NavBar />
                  <Grid centered columns={2} padded='vertically'>
                      
                     <Form className='create-user-form'>
@@ -194,7 +195,7 @@ export default class CreateBandForm extends Component {
                         </Form.Field>
                     </Form>
                 </Grid>
-                {/* <BandDisplayContainer bandInfo={this.state.band}/> */}
+              
             </div>
         )
     }

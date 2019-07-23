@@ -11,7 +11,6 @@ export default class ListingsPageContainer extends Component {
         super();
         this.state = {
             listings: []
-            // listings: [{title: 'Looking for a Vocalist July 25th', host: 'Lake street dive', description: 'fill in', instruments: 'voice', email: 'hengel@alumni.berklee.edu'}, {title: 'Drummer Opening for Lake Street Dive: Auditions 30th of August', host: 'NAO', description: 'sub', instruments: 'banjo', email: 'hengel@alumni.berklee.edu'}]
         };
         this.fetchListings()
     }

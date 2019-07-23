@@ -6,7 +6,7 @@ import Facebook from './components/Facebook';
 import FilterContainer from './components/listings-components/filter-components/FilterContainer';
 import Login  from './components/Login.js'
 import LandingPage from './LandingPage';
-import CreateBandForm from './components/logincomponents/CreateBandForm';
+import CreateBandForm from './components/CreateBandForm';
 import BandDisplayContainer from './components/BandDisplayContainer';
 import ListingsPageContainer from './components/ListingsPageContainer';
 import MuscianDisplayContainer from './components/MusicianDisplayContainer';

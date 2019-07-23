@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Accordion, Icon } from 'semantic-ui-react'
 
-export default class ListingAccordian extends Component {
+export default class BandListingsAccordian extends Component {
   state = { activeIndex: 0 }
 
   handleClick = (e, titleProps) => {
@@ -37,7 +37,7 @@ export default class ListingAccordian extends Component {
               </Accordion.Title>
               <Accordion.Content active={activeIndex === index}>
                 <section>
-                <p> {listing.band.name} </p>
+                <p> {listing.band} </p>
                 <p>{`Instruments:   ${listing.instruments}`} </p>
                 <p>{`Description:   ${listing.description}`} </p>
                 <button onClick={()=>{this.handleContact(listing)}} class="ui primary basic button">Contact</button>
