@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Icon, Grid, Form} from 'semantic-ui-react'
+import { Button, Header, Grid, Form} from 'semantic-ui-react'
 import ListingAccordian from './listings-components/ListingAccordian.js'
 import NavBar from './NavBar.js'
 import BandPhoto from './band-show-components/BandPhoto'
@@ -41,7 +41,7 @@ export default class BandDisplayContainer extends Component {
           fetch('http://localhost:3000/api/v1/musicians')
               .then(res=>res.json())
               .then(data => {this.setState(prevState => ({
-                    musician: data[2]
+                    musician: data[13]
                 }), ()=> console.log(this.state.musician))}
             );
       }
@@ -62,7 +62,7 @@ export default class BandDisplayContainer extends Component {
     handleSubmit = e => {
         e.preventDefault();
         this.handleEditClick();
-        console.log('inside handle edit submit')
+        console.log('inside handle edit submit', this.state.musician)
         const id = this.state.musician.id
         const url = `http://localhost:3000/api/v1/musicians/${id}`
         const musician = this.state.musician
@@ -87,20 +87,22 @@ export default class BandDisplayContainer extends Component {
         let value = event.target.value
         this.setState(prevState => ({
             musician: {...this.state.musician, [name]: value}
-        }))
+        }), () => console.log(this.state.musician.bio))
     }
 
     render() {
-        const {facebook, instagram, name, email, instruments, genre, image_url, spotify, soundcloud} = this.state.musician
+        const {facebook, instagram, name, email, bio, instruments, genre, image_url, spotify, soundcloud} = this.state.musician
        
         return( 
          
             <React.Fragment> 
                 <form className="ui form">
                 <NavBar />
-
                 {this.state.viewMode.editView==false? 
-                <button className='ui green button' onClick={this.handleEditClick}> Click to Edit </button> :
+                <div>
+                <button className='ui teal button' onClick={this.handleEditClick}>  <i class="edit icon"></i>Click for Edit Mode </button> 
+                <Header className='dividing'>Musician</Header>
+                </div>:
                 <button className ='ui submit button' name='submit' onClick={this.handleSubmit}> Submit Edits </button>}
                 <div className='band-profile-div'>
                 <div className="ui relaxed grid">
@@ -114,7 +116,7 @@ export default class BandDisplayContainer extends Component {
                             <Form.Field  onChange={this.handleChange}>
                             <label >
                                 <i className="file upload icon"></i>
-                                Band Photo URL</label>
+                                Musician Photo URL</label>
                             <input type="text" placeholder={image_url} name='image_url' />
                             </Form.Field>
                             </React.Fragment>}
@@ -127,6 +129,10 @@ export default class BandDisplayContainer extends Component {
                             <Form.Field  onChange={this.handleChange}>
                                 <label>Name</label>
                                 <input name='name' placeholder={name}/>
+                            </Form.Field>
+                            <Form.Field  onChange={this.handleChange}>
+                                <label>Bio</label>
+                                <input name='bio' placeholder={bio}/>
                             </Form.Field>
                             <Form.Field  onChange={this.handleChange}>
                                 <label>Email Contact</label>

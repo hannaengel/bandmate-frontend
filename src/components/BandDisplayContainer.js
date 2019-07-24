@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Button, Icon, Grid, Form} from 'semantic-ui-react'
+import { Button, Icon, Grid, Header, Form} from 'semantic-ui-react'
 import NavBar from './NavBar.js'
 import BandPhoto from './band-show-components/BandPhoto'
 import BandPhotoEdit from './band-show-components/BandPhotoEdit'
@@ -32,23 +32,26 @@ export default class BandDisplayContainer extends Component {
             editView: false
         }
         };
-        this.fetchListings()
+        this.fetchBand()
     }
-    fetchListings = () =>{
+    fetchBand = () =>{
         console.log('in fetch bands')
 
           fetch('http://localhost:3000/api/v1/bands')
               .then(res=>res.json())
               .then(data => {this.setState(prevState => ({
-                    band: data[2]
+                    band: data[1]
                 }), ()=> console.log(this.state.band))}
             );
       }
 
     handleClick = event => {
-        event.target.name==='instagram'? 
-        window.open(this.state.band.instagram, '_blank'):
-        window.open(this.state.band.facebook, '_blank');
+        const type = event.target.name
+        if (type == 'instagram'){
+            window.open(this.state.band.instagram, '_blank')
+        }else{
+            window.open(this.state.band.facebook, '_blank')
+        }       
     }
 
     handleEditClick = () =>{
@@ -84,7 +87,6 @@ export default class BandDisplayContainer extends Component {
         })
       .then(res=>res.json())
       .then(json => {
-        console.log(json)
       })
     }
 
@@ -104,6 +106,13 @@ export default class BandDisplayContainer extends Component {
         })     
     }
 
+    // updateListings = listings =>{
+    //     console.log('update listings hit', listings)
+    //     this.setState(prevState => ({
+    //         band: {...this.state.band, listings: listings}
+    //     }), ()=> console.log(this.state.band))
+    // }
+
 
 
     render() {
@@ -116,7 +125,11 @@ export default class BandDisplayContainer extends Component {
                 <NavBar />
 
                 {this.state.viewMode.editView==false? 
-                <button className='ui green button' onClick={this.handleEditClick}> Click to Edit </button> :
+                <div>
+                <button className='ui teal button' onClick={this.handleEditClick}>  <i class="edit icon"></i>Click for Edit Mode </button> 
+                <Header className='dividing'>Band</Header>
+                </div>
+                :
                 <button className ='ui submit button' onClick={this.handleSubmit}> Submit Edits </button>}
                 <div className='band-profile-div'>
                 <div class="ui relaxed grid">
@@ -201,7 +214,7 @@ export default class BandDisplayContainer extends Component {
                             </Form.Field>
                             </div>
                         <div class="ten wide column">
-                           <BandListingsDiv onDelete={this.removeListing} editView={this.state.viewMode.editView} band={this.state.band} listings={this.state.band.listings} />
+                           <BandListingsDiv onDelete={this.removeListing} updateListings={this.updateListings} editView={this.state.viewMode.editView} band={this.state.band} listings={this.state.band.listings} />
                         </div>
                     </Grid.Row>}
                 

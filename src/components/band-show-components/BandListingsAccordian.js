@@ -54,7 +54,7 @@ export default class BandListingsAccordian extends Component {
         const updateListing = this.state.listings[this.state.activeIndex]
         const url = `http://localhost:3000/api/v1/listings/${id}`
            fetch(url, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
             'Content-Type': 'application/json',
             },
@@ -66,6 +66,7 @@ export default class BandListingsAccordian extends Component {
       .then(json => {
         console.log('json should log here', json)
       })   
+      // this.props.updateListings(this.state.listings)
     }
 
   render() {
@@ -84,7 +85,7 @@ export default class BandListingsAccordian extends Component {
           <div id={listing.id}>
              <Accordion.Title active={activeIndex === index} index={index} onClick={this.handleClick}>
                 <Icon name='dropdown' />
-                  {band.name}
+                  {listing.title}
               </Accordion.Title>
               <Accordion.Content active={activeIndex === index}>
                 <section>
@@ -103,7 +104,7 @@ export default class BandListingsAccordian extends Component {
                 <Form id={listing.id}>
                 <Accordion.Title active={activeIndex === index} index={index} onClick={this.handleClick}>
                   <Icon name='dropdown' />
-                    {band.name}
+                    {listing.title}
                 </Accordion.Title>
                 <Accordion.Content active={activeIndex === index}>
                   <section>

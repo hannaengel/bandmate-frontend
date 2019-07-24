@@ -1,6 +1,9 @@
 import React, { Component} from 'react'
 import { Button, Form, Grid } from 'semantic-ui-react'
 import NavBar from './NavBar'
+import { Link } from 'react-router-dom'
+import InstrumentsSelector from './select-components/InstrumentsSelector.js'
+import GenresSelector from './select-components/GenresSelector.js'
 
 export default class CreateBandForm extends Component {
 
@@ -12,15 +15,22 @@ export default class CreateBandForm extends Component {
             email: null,
             password: null,
             name: null,
-            instruments: null,
+            instruments: [],
             genres: null,
             spotify: null,
             soundcloud: null,
             instagram: null,
             facebook: null,
             image_url: null
-        }
+        },
+        created: false
         };
+    }
+
+    toggle = () =>{
+        this.setState(prevState => ({
+            created: !this.state.created
+        }), ()=> console.log('STATE', this.state.created))
     }
 
     handleChange = event => {
@@ -29,6 +39,17 @@ export default class CreateBandForm extends Component {
         this.setState({
            band: {...this.state.band, [name]: value}
         }, ()=> console.log(this.state));
+    }
+
+    updateInstruments = instruments =>{
+        this.setState({
+            band: {...this.state.band, instruments: instruments}
+         }, ()=> console.log('PARENT STATE', this.state.band.instruments));
+    }
+    updateGenres = genres =>{
+        this.setState({
+            band: {...this.state.band, genres: genres}
+         }, ()=> console.log('PARENT STATE', this.state.band.genres));
     }
 
     handleSpotify = event => {
@@ -72,6 +93,7 @@ export default class CreateBandForm extends Component {
   
     handleSubmit = ()=>{
         this.createUser()
+        this.toggle()
     }
 
 
@@ -81,7 +103,7 @@ export default class CreateBandForm extends Component {
             <div>
                 <NavBar />
                  <Grid centered columns={2} padded='vertically'>
-                     
+                 {this.state.created===false?
                     <Form className='create-user-form'>
                     <div className='column'>
                         <h2 className="ui center aligned icon header">
@@ -127,34 +149,14 @@ export default class CreateBandForm extends Component {
                          <Form.Field id='instruments'>
                             <div  class="field">
                             <label>Instrumentation</label>
-                            <select multiple="" class="ui dropdown">
-                            <option value="">Select Instruments</option>
-                            <option value="brass">Brass</option>
-                            <option value="bass">Bass</option>
-                            <option value="keyboard">Keyboard</option>
-                            <option value="percussion">Percussion</option>
-                            <option value="strings">Strings</option>
-                            <option value="voice">Voice</option>
-                            </select>
+                           <InstrumentsSelector updateInstruments={this.updateInstruments}/>
                             </div>
                         </Form.Field> 
 
                         <Form.Field id='genres'>
                             <div class="field">
                             <label>Genre</label>
-                            <select multiple="" class="ui dropdown">
-                            <option value="">Select Genre</option>
-                            <option value="country">Country</option>
-                            <option value="electronic">Electronic</option>
-                            <option value="folk">Folk</option>
-                            <option value="gospel">Gospel</option> 
-                            <option value="hip-hop">Hip-hop</option>
-                            <option value="jazz">Jazz</option>
-                            <option value="neo-soul">Neo-Soul</option>
-                            <option value="pop">Pop</option> 
-                            <option value="r&b">R&B</option>
-                            <option value="soul">Soul</option>
-                            </select>
+                           <GenresSelector updateGenres={this.updateGenres} />
                             </div>
                         </Form.Field> 
 
@@ -190,10 +192,19 @@ export default class CreateBandForm extends Component {
                         <Button onClick={this.handleSubmit}>Create Profile</Button>
                         </Form.Field>
 
-                        <Form.Field>
+                        {/* <Form.Field>
                         <Button onClick={this.backToLogin}>Return to Login</Button>
-                        </Form.Field>
-                    </Form>
+                        </Form.Field> */}
+                    </Form>: 
+                    <div>
+                        <div className='row'>
+                            <h1>Created!</h1>
+                        </div>
+                        <div className='row'>
+                        <Link to="/band/show"> Go To Band Profile </Link>
+                        </div>
+                    </div>}
+                    
                 </Grid>
               
             </div>

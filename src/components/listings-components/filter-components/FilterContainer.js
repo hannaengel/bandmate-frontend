@@ -3,7 +3,9 @@ import InstrumentFilter from './InstrumentFilter'
 
 
 export default class FilterContainer extends Component {
-
+    handleChange = e => {
+        this.props.onFilter(e.target.value)
+    }
     render() {
         return( 
             <React.Fragment>
@@ -15,7 +17,8 @@ export default class FilterContainer extends Component {
                     </a>
 
                     <div class="item">
-                         <div class="ui input"><input type="text" placeholder="Search..." /></div>
+                         <div onChange={this.handleChange} class="ui input"><input type="text" placeholder="Search..." /></div>
+                         
                      </div>
                      
                     <InstrumentFilter />

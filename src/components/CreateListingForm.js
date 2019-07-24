@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Grid, Button, TextArea } from 'semantic-ui-react'
 import NavBar from './NavBar'
+import InstrumentsSelector from './select-components/InstrumentsSelector.js'
 
 export default class CreateListingForm extends Component {
 
@@ -11,10 +12,17 @@ export default class CreateListingForm extends Component {
             listing: {
                 title: '',
                 description: '',
-                instruments: '',
+                instruments: [],
                 band_id: ''
-            }   
+            },  
+            created: false
         }
+    }
+
+    updateInstruments = instruments =>{
+        this.setState({
+            band: {...this.state.band, instruments: instruments}
+         }, ()=> console.log('PARENT STATE', this.state.band.instruments));
     }
 
     handleChange = event => {
@@ -43,6 +51,15 @@ export default class CreateListingForm extends Component {
 
     handleSubmit = ()=>{
         this.createListing()
+       this.toggle()
+    }
+
+
+
+    toggle = () =>{
+        this.setState(prevState => ({
+            created: !this.state.created
+        }), ()=> console.log(this.state.created))
     }
 
     render() {
@@ -50,7 +67,9 @@ export default class CreateListingForm extends Component {
         return(
             <div>
                 <NavBar />
+                <div className='create-listing-form'>
                  <Grid centered columns={2} padded='vertically'>
+                 {this.state.created===false?
                     <Form className='ui-form'>
                         
                         <h2 className="ui center aligned icon header">
@@ -67,21 +86,26 @@ export default class CreateListingForm extends Component {
                         <input type="band_id" name='band_id' placeholder='' required/>
                         </Form.Field>
 
-                        <Form.Field  onChange={this.handleChange}>
-                        <label>Instruments Needed</label>
-                        <input type="instruments" name='instruments' placeholder='' required/>
-                        </Form.Field>
-
+                        <Form.Field id='instruments'>
+                            <div  class="field">
+                            <label>Instruments Needed</label>
+                          <InstrumentsSelector updateInstruments={this.updateInstruments}/>
+                            </div>
+                        </Form.Field> 
                         <textarea onChange={this.handleChange} type="description" name='description' placeholder="Include date, time, location and other details"  rows="3"></textarea>
-
+                        
                         <Form.Field>
                         <Button onClick={this.handleSubmit}>Create Listing</Button>
                         </Form.Field>
-
-                      
-                    </Form>
-                  
+                        </Form>:
+                        <div>
+                            <h2>Your listing was posted! </h2>
+                            <button onClick={this.toggle} className='ui basic blue button'> Create Another Listing </button>
+                        </div>}
+                        
+                    
                 </Grid>
+                </div>
             </div>
         )
     }

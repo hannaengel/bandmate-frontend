@@ -19,7 +19,7 @@ export default class Bio extends Component {
                 <div className="ui divider"></div>
                 <h4>Email: {email}</h4>
                 <div className="ui divider"></div>
-                    <Button onClick={this.handleClick} color='instagram'>
+                    <Button name='instagram' onClick={this.handleClick} color='instagram'>
                         <Icon name='instagram' /> Instagram
                     </Button>
                     

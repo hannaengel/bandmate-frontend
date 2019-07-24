@@ -48,6 +48,19 @@ img{ max-width:100%;
   padding: 50px;
 }
 
+.create-musician-form{
+  padding: 80px;
+}
+
+.create-listing-form{
+  padding: 100px !important;
+}
+
+.center-div-items {
+  display: flex !important;
+  justify-content: center !important;
+}
+
 body{
   background-color: lightblue !important;
 }
