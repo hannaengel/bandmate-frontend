@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import InstrumentFilter from './InstrumentFilter'
+import InstrumentSelector from '/Users/hannaengel/Development/projects/practice-app/src/components/select-components/InstrumentsSelector.js'
 
 
 export default class FilterContainer extends Component {
@@ -21,7 +22,7 @@ export default class FilterContainer extends Component {
                          
                      </div>
                      
-                    <InstrumentFilter />
+                    <InstrumentSelector updateInstruments={this.props.updateInstruments}/>
                  </div>
                  </section>
              </React.Fragment>

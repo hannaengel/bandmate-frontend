@@ -18,7 +18,8 @@ export default class NavBar extends Component {
     logout() {
       console.log('logout is hit!')
       localStorage.setItem('jwt', '')
-      window.location.replace("http://localhost:3001/");
+      localStorage.setItem('band_id', '')
+      window.location.replace("https://localhost:3001/login");
       return false
       }
 
@@ -41,8 +42,8 @@ export default class NavBar extends Component {
 
     render() {
         return(
-            <div >
-               <div className="ui nine fluid item top attached menu borderless">
+            <div className='navbar-fixed-top'>
+               <div className="ui ten fluid item top attached menu borderless">
                 <div className="item">
 
                 <div className="item nav_link">
@@ -87,7 +88,11 @@ export default class NavBar extends Component {
                   Create Musician
                 </NavLink>
                 </div>
-                
+                <div className='item'>
+                <NavLink to="/bands" activeClassName="hurray">
+                  Bands Index
+                </NavLink>
+                </div>                
            
       
                <div  className="item">

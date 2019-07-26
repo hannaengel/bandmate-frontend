@@ -1,20 +1,23 @@
 class Api::V1::BandsController < ApplicationController
-    # skip_before_action :authorized, only: [:create, :index]
+  skip_before_action :authorized, only: [:create, :update, :index, :show]
       
-    def profile
-      render json: { band: current_band }, status: :accepted
+    def profile 
+      render json: { band: BandSerializer.new(current_band) }, status: :accepted
     end
+  
+    def show 
+      render json: { band: BandSerializer.new(current_band) }, status: :accepted
+    end
+  
     
     def create
-      @band = Band.create(band_params)
-  
-        if @band
-      #   @token = encode_token(band_id: @band.id)
-      #   debugger
-        render json: { band: BandSerializer.new(@band) }, status: :created
-        # render json: { band: @band, jwt: @token }, status: :created
-      # else
-      #   render json: { error: 'failed to create band' }, status: :not_acceptable
+      @band = Band.create(band_create_params)  
+      if @band
+         @token = encode_token(band_id: @band.id)
+        render json: { message: 'in create band bandController', band: BandSerializer.new(@band), jwt: @token }, status: :created
+       else
+         render json: { error: @band.errors }, status: :not_acceptable
+         puts @band.errors
         end
     end
 
@@ -22,6 +25,7 @@ class Api::V1::BandsController < ApplicationController
       @bands = Band.all
       render json: @bands
     end 
+
 
     def update
       @band = Band.find(band_params[:id])
@@ -35,6 +39,9 @@ class Api::V1::BandsController < ApplicationController
 
     private
     def band_params
+      params.require(:band).permit(:id, :username, :password, :email, :name, :instruments, :genres, :spotify, :soundcloud, :instagram, :facebook, :image_url, :band)
+    end
+    def band_create_params
       params.require(:band).permit(:id, :username, :password, :email, :name, :instruments, :genres, :spotify, :soundcloud, :instagram, :facebook, :image_url, :band)
     end
   end

@@ -3,7 +3,6 @@ import { Button, Header, Grid, Form} from 'semantic-ui-react'
 import ListingAccordian from './listings-components/ListingAccordian.js'
 import NavBar from './NavBar.js'
 import BandPhoto from './band-show-components/BandPhoto'
-import BandPhotoEdit from './band-show-components/BandPhotoEdit'
 import Bio from './band-show-components/Bio'
 import Spotify from './band-show-components/Spotify';
 import BandListingsDiv from './band-show-components/BandListingsDiv';

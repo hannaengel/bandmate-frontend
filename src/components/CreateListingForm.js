@@ -21,27 +21,29 @@ export default class CreateListingForm extends Component {
 
     updateInstruments = instruments =>{
         this.setState({
-            band: {...this.state.band, instruments: instruments}
-         }, ()=> console.log('PARENT STATE', this.state.band.instruments));
+            listing: {...this.state.listing, instruments: instruments}
+         }, ()=> console.log('PARENT STATE', this.state.listing.instruments));
     }
+
 
     handleChange = event => {
         const {name, value} =event.target;
 
         this.setState({
            listing: {...this.state.listing, [name]: value}
-        }, ()=> console.log(this.state));
+        });
     }
 
     createListing= () =>{
         const URL = 'http://localhost:3000/api/v1/listings'
-        const listing = this.state.listing
+        const {title, description, band_id} = this.state.listing
+        const instruments = this.state.listing.instruments.join(' ')
         const headers = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({listing})
+            body: JSON.stringify({listing: {title: title, instruments: instruments, description: description, band_id: band_id}})
         }
         fetch(URL, headers)
             .then(res=>res.json())
@@ -49,12 +51,13 @@ export default class CreateListingForm extends Component {
                 console.log('Data', data)})       
         }
 
-    handleSubmit = ()=>{
-        this.createListing()
-       this.toggle()
+    handleSubmit = e =>{
+        e.preventDefault()
+        this.createListing();
+        this.toggle();
     }
 
-
+    
 
     toggle = () =>{
         this.setState(prevState => ({
@@ -68,13 +71,12 @@ export default class CreateListingForm extends Component {
             <div>
                 <NavBar />
                 <div className='create-listing-form'>
-                 <Grid centered columns={2} padded='vertically'>
+    
                  {this.state.created===false?
-                    <Form className='ui-form'>
-                        
-                        <h2 className="ui center aligned icon header">
+                    <Form onSubmit={this.handleSubmit} className='ui-form'>   
+                        <h1 className="ui center aligned icon header dividing">
                         Create Listing
-                        </h2>
+                        </h1>
            
                         <Form.Field onChange={this.handleChange}>
                         <label>Title</label>
@@ -83,28 +85,29 @@ export default class CreateListingForm extends Component {
 
                         <Form.Field  onChange={this.handleChange}>
                         <label>Band Id</label>
-                        <input type="band_id" name='band_id' placeholder='' required/>
+                        <input name='band_id' placeholder='' required/>
                         </Form.Field>
 
                         <Form.Field id='instruments'>
-                            <div  class="field">
+    
                             <label>Instruments Needed</label>
                           <InstrumentsSelector updateInstruments={this.updateInstruments}/>
-                            </div>
+        
                         </Form.Field> 
-                        <textarea onChange={this.handleChange} type="description" name='description' placeholder="Include date, time, location and other details"  rows="3"></textarea>
-                        
+
                         <Form.Field>
-                        <Button onClick={this.handleSubmit}>Create Listing</Button>
+                        <label>Description</label>
+                        <textarea onChange={this.handleChange} type="description" name='description' placeholder="Include date, time, location and other details"  rows="3"></textarea>
+                        </Form.Field>
+
+                        <Form.Field className='center-div-items'>
+                        <input className='ui submit blue button' type='submit' value='Create Listing' />
                         </Form.Field>
                         </Form>:
                         <div>
                             <h2>Your listing was posted! </h2>
                             <button onClick={this.toggle} className='ui basic blue button'> Create Another Listing </button>
                         </div>}
-                        
-                    
-                </Grid>
                 </div>
             </div>
         )

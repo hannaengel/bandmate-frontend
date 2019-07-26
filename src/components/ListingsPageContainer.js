@@ -39,6 +39,12 @@ export default class ListingsPageContainer extends Component {
          this.getFilteredListings()
       }
 
+      updateInstruments = instruments =>{
+        this.setState({
+            search: instruments
+         }, ()=> console.log('PARENT STATE', this.state));
+    }
+
       getFilteredListings = () =>{
           const url = 'http://localhost:3000/api/v1/listings?search=' + this.state.search
           console.log(url)
@@ -79,7 +85,7 @@ export default class ListingsPageContainer extends Component {
                  <Header as='h1' className='dividing'> Browse Listings </Header>
                 <div className='ui grid container'>
                     <div className='six wide column'>
-                        <FilterContainer onFilter={this.handleFilter}/>
+                        <FilterContainer updateInstruments={this.updateInstruments} onFilter={this.handleFilter}/>
                        
                     </div>
                     <div className='ten wide column'>

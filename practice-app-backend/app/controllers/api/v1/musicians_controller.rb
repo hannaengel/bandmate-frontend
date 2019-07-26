@@ -1,5 +1,5 @@
 class Api::V1::MusiciansController < ApplicationController
-    # skip_before_action :authorized, only: [:create, :index]
+    skip_before_action :authorized, only: [:create, :index]
 
     def profile
         @musician = Musician.find(musician_params[:id])

@@ -1,6 +1,6 @@
 class Api::V1::ListingsController < ApplicationController
     
-    
+  skip_before_action :authorized
   
 
     def create
@@ -16,7 +16,7 @@ class Api::V1::ListingsController < ApplicationController
         #refactor code into model, not controller
         if params[:search]
           @search = params[:search]
-            @listings = Listing.where("title LIKE ?", "%#{params[:search]}%")
+            @listings = Listing.where("title LIKE ?", "%#{params[:search]}%") 
             #  @listings.paginate(:page => params[:page])
             #  current_page = 1
             render json:{
