@@ -1,19 +1,22 @@
 class Api::V1::MusiciansController < ApplicationController
-    skip_before_action :authorized, only: [:create, :index]
+    skip_before_action :authorized, only: [:show, :create, :profile, :index]
 
-    def profile
-        @musician = Musician.find(musician_params[:id])
-        render json: { musician: @musician }, status: :accepted
-      end
+    def profile 
+      render json: { musician: MusicianSerializer.new(current_user)}, status: :accepted
+    end
+  
+    def show 
+      render json: { musician: MusicianSerializer.new(current_user) }, status: :accepted
+    end
 
     def create
         @musician = Musician.create(musician_params)
-         if @musician
-        #   @token = encode_token(band_id: @musician.id)
-          
-        render json: { musician: @musician}, status: :created
-        # else
-        #   render json: { error: 'failed to create musician' }, status: :not_acceptable
+        if @musician
+          @token = encode_token(musician_id: @musician.id)
+         render json: { message: 'in create musician Controller', musician: MusicianSerializer.new(@musician), jwt: @token }, status: :created
+       
+         else
+           render json: { error: 'failed to create musician' }, status: :not_acceptable
          end
       end
   

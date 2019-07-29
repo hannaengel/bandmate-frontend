@@ -99,3 +99,30 @@ box-shadow: -10px 21px 36px -16px rgba(0,0,0,0.42);}
      
     z-index: 999;
 }
+
+/* a {
+  color: white !important;
+  font-family: 'Roboto', sans-serif !important;
+} */
+
+.login{
+  padding: 100px;
+  background-color:rgba(43, 43, 44, 0.966);
+  color: white !important;
+
+  -webkit-box-shadow: 3px 10px 13px 5px rgba(0,0,0,0.64);
+  -moz-box-shadow: 3px 10px 13px 5px rgba(0,0,0,0.64);
+  box-shadow: 3px 10px 13px 5px rgba(0,0,0,0.64);
+}
+
+.white-text{
+  color: white !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 15px !important;
+}
+
+.coral-text{
+  color: coral !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 15px !important;
+}

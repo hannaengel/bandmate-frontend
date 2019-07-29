@@ -34,16 +34,43 @@ export default class BandDisplayContainer extends Component {
         this.fetchMusicians()
     }
     
-    fetchMusicians = () =>{
-        console.log('in fetch musicians')
+    // fetchAllMusicians = () =>{
+    //     console.log('in fetch musicians')
 
-          fetch('http://localhost:3000/api/v1/musicians')
-              .then(res=>res.json())
-              .then(data => {this.setState(prevState => ({
-                    musician: data[13]
-                }), ()=> console.log(this.state.musician))}
-            );
+    //       fetch('http://localhost:3000/api/v1/musicians')
+    //           .then(res=>res.json())
+    //           .then(data => {this.setState(prevState => ({
+    //                 musician: data[13]
+    //             }), ()=> console.log(this.state.musician))}
+    //         );
+    //   }
+
+      componentDidMount(){
+          this.props.getProfile()
+          this.fetchMusicians()
+    }
+    fetchMusicians = () =>{
+
+    //     console.log(this.props.user_type)
+         if (this.props.user_type=='musician'){
+      
+        this.setState(prevState => ({
+            musician: this.props.current_user
+        }), ()=> console.log(this.state))
+    //     }else{
+    //     console.log('in fetch musicians without logged in musician')
+    //     // const seeMusician = this.props.seeMusician
+    //      const seeMusician = 22
+    //     const url = 'http://localhost:3000/api/v1/musicians/' + seeMusician
+    //     console.log('in fetch', url, seeMusician)
+    //   fetch(url)
+    //   .then(res=>res.json())
+    //   .then(data => {this.setState(prevState => ({
+    //     musician: data.musician
+    // }), ()=> console.log('IN STATEEEEE ',this.state))}
+    //     );
       }
+    }
 
     handleClick = event => {
         event.target.name==='instagram'? 

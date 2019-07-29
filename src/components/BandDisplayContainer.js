@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import { Button, Icon, Grid, Header, Form} from 'semantic-ui-react'
 import NavBar from './NavBar.js'
 import BandPhoto from './band-show-components/BandPhoto'
@@ -30,41 +29,36 @@ export default class BandDisplayContainer extends Component {
         },
         viewMode: {
             editView: false
-        },
-        this_band_logged_in: false
+        }
         };
     }
 
     componentDidMount(){
+        // this.props.getProfile()
+        console.log(this.props.user)
         this.fetchBand()
     }
     fetchBand = () =>{
-        if (this.props.bandLoggedIn==false ){
-            fetch('http://localhost:3000/api/v1/bands')
-            .then(res=>res.json())
-            .then(data => {this.setState(prevState => ({
-                  band: data[2]
-              }), ()=> console.log(this.state))}
-          );
-        }else{
-            //if band profile is being viewed by the band--makes edit button viewable as well
-        let token = localStorage.getItem("jwt")
-        console.log('in fetch bands')
-        const url = `http://localhost:3000/api/v1/bands/profile`
-        fetch(url, {
-        headers: {
-        'Authorization': 'Bearer ' + token
-             }
-         })
-              .then(res=>res.json())
-              .then(data => {this.setState(prevState => ({
-                    band: data.band,
-                    this_band_logged_in: true
-                }), ()=> console.log('state: ', this.state))}
-            );
+        this.props.getProfile()
+        console.log(this.props.user_type) 
+        if (this.props.user_type=='band'){
+            this.setState(prevState => ({
+                band: this.props.current_user,
+                this_band_logged_in: true
+            }), ()=> console.log('state fetch bands after band ',this.state))
+            }else{
+            console.log('in fetch bands')
+            const seeBand = 2
+            const url = 'http://localhost:3000/api/v1/bands/' + seeBand
+            console.log('in fetch bands', url, seeBand)
+        fetch(url)
+        .then(res=>res.json())
+        .then(data => {this.setState(prevState => ({
+            band: data.band
+            }), ()=> console.log('IN STATEEEEE ',this.state, url))}
+         );
         }
-            console.log('end of fetch bands', this.state)
-      }
+    }
 
     handleClick = event => {
         const type = event.target.name
@@ -95,8 +89,7 @@ export default class BandDisplayContainer extends Component {
         let token = localStorage.getItem("jwt")
         this.handleEditClick();
         console.log('inside handle edit submit')
-        const id = this.state.band.id
-        const url = `http://localhost:3000/api/v1/bands/${id}`
+        const url = `http://localhost:3000/api/v1/bands/${this.props.current_user.id}`
         const band = this.state.band
         fetch(url, {
             method: 'PUT',
@@ -129,14 +122,6 @@ export default class BandDisplayContainer extends Component {
         })     
     }
 
-    // updateListings = listings =>{
-    //     console.log('update listings hit', listings)
-    //     this.setState(prevState => ({
-    //         band: {...this.state.band, listings: listings}
-    //     }), ()=> console.log(this.state.band))
-    // }
-
-
 
     render() {
         const {facebook, instagram, bio, name, email, instruments, genre, image_url, spotify, soundcloud} = this.state.band
@@ -149,13 +134,13 @@ export default class BandDisplayContainer extends Component {
 
                 {this.state.viewMode.editView==false? 
                 <div className='shadow'>
-                {this.state.this_band_logged_in==true?
-                <button className='ui teal button' onClick={this.handleEditClick}>  <i class="edit icon"></i>Click for Edit Mode </button> 
+                {this.props.this_band_logged_in==true?
+                <button className='ui orange button' onClick={this.handleEditClick}>  <i class="edit icon"></i>Click for Edit Mode </button> 
                 :null}
                 <Header className='dividing'>Band</Header>
                 </div>
                 :
-                <button className ='ui submit button' onClick={this.handleSubmit}> Submit Edits </button>}
+                <button className ='ui submit orange button' onClick={this.handleSubmit}> Submit Edits </button>}
                 <div className='band-profile-div'>
                 <div class="ui relaxed grid">
                     <Grid.Row stretched>

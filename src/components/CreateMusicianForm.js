@@ -54,6 +54,7 @@ export default class CreateBandForm extends Component {
     }
     
     createMusician = () =>{
+        console.log('IN CREATE MUSICIAN STATE', this.state)
         const URL = 'http://localhost:3000/api/v1/musicians'
         const {username, email, password, name, spotify,soundcloud, instagram, facebook, image_url, bio} = this.state.musician
         const instruments = this.state.musician.instruments.join(' ')
@@ -63,7 +64,7 @@ export default class CreateBandForm extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
+            body: JSON.stringify({musician: {
                 username: username, 
                 email: email, 
                 password: password, 
@@ -75,16 +76,15 @@ export default class CreateBandForm extends Component {
                 image_url: image_url, 
                 bio: bio,
                 instruments: instruments,
-            genres: genres})
+            genres: genres}})
         }
         fetch(URL, headers)
             .then(res=>res.json())
             .then(data => {
-            // console.log('JWT', data.jwt, 'Data', data)
-            // const token =  data.jwt
-            // localStorage.setItem('jwt', token);
-             console.log( 'Data', data)
-            // this.props.getProfile()
+                const token =  data.jwt
+                localStorage.setItem('jwt', token);
+                console.log( 'Data', data)
+                this.props.getProfile()
         })
            
     }

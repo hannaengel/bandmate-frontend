@@ -22,15 +22,22 @@ class ApplicationController < ActionController::API
       end
     end
    
-    def current_band
-      if decoded_token
-        band_id = decoded_token[0]['band_id']
-        @band = Band.find_by(id: band_id)
-      end
-    end
+    def current_user
+      if decoded_token && decoded_token[0]
+        if decoded_token[0].keys.include?('band_id')
+         band_id = decoded_token[0]['band_id']
+         @band = Band.find_by(id: band_id)
+        else 
+          musician_id = decoded_token[0]['musician_id']
+          @musician = Musician.find_by(id: musician_id)
+    end 
+  end
+  end
+
+   
    
     def logged_in?
-      !!current_band
+      !!current_user
     end
    
     def authorized

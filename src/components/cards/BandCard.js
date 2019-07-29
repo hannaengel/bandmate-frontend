@@ -1,18 +1,27 @@
 import React, { Component } from 'react'
 import { Card } from 'semantic-ui-react'
+import BandDisplayContainer from '../MusicianDisplayContainer';
 
 export default class BandCard extends Component {
 
+   
+
+
+    toBandProfile = () =>{
+      
+     this.props.displayBand(this.props.band.id)
+    }
 
     render() {
         const band = this.props.band
         return( 
-            <div class="ui card">
-                <div class="ui image">
+        <React.Fragment>
+            <div class="ui raised card">
+                <div onClick={this.toBandProfile} class="ui image">
                     <img src={band.image_url}/>
                 </div>
                 <div class="content">
-                    <a class="header">{band.name}</a>
+                    <a onClick={this.toBandProfile} class="header">{band.name}</a>
                 </div>
                 <div class="extra content">
                     {band.listings.length!==0?
@@ -27,6 +36,7 @@ export default class BandCard extends Component {
                    
                 </div>
             </div>
+            </React.Fragment>
         )
     }
 }

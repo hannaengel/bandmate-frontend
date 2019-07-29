@@ -2,12 +2,18 @@ class Api::V1::BandsController < ApplicationController
   skip_before_action :authorized, only: [:create, :update, :index, :show]
       
     def profile 
-      render json: { band: BandSerializer.new(current_band) }, status: :accepted
+      render json: { band: BandSerializer.new(current_user) }, status: :accepted
     end
   
     def show 
-      render json: { band: BandSerializer.new(current_band) }, status: :accepted
-    end
+      @band = Band.find(params[:id]) 
+      if @band
+        # byebug
+        render json: { band: BandSerializer.new(@band) }, status: :accepted
+      else
+        render json: { error: @band.errors }, status: :not_acceptable
+      end
+    end 
   
     
     def create

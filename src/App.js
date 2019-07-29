@@ -25,27 +25,55 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      band_id: null,
-      band_logged_in: false,
-      token: ["token_hash, user, expiration (datetimestamp)"] // dictionary, not list
+      current_user: null,
+      logged_in: false,
+      token: '',
+      user_type: null ,
+      this_band_logged_in: false,
+      this_musicican_logged_in: false
     };
   }
   getProfile = () => {
      let token = localStorage.getItem("jwt")
+     let type = localStorage.getItem("type")
      console.log(token)
-    fetch('http://localhost:3000/api/v1/bands/profile', {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    })
-    .then(res=>res.json())
-    .then(json=> {
-      this.setState(prevState => ({
-        band_logged_in: true
-      }), ()=> localStorage.setItem('band_id', this.state.band_id))
-    })
-    
-    console.log('git getProfile in parent')
+     if (type == 'band'){
+        fetch('http://localhost:3000/api/v1/bands/profile', {
+          headers: {
+            'Authorization': 'Bearer ' + token
+          }
+        })
+        .then(res=>res.json())
+        .then(json=> {
+          this.setState(prevState => ({
+            logged_in: true,
+            current_user: json.band,
+            token: token,
+            this_band_logged_in: true,
+            user_type: type
+          }), () => this.setLocalStorage())
+        })}else{
+      fetch('http://localhost:3000/api/v1/musicians/profile', {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      })
+      .then(res=>res.json())
+      .then(json=> {
+        this.setState(prevState => ({
+          logged_in: true,
+          current_user: json.musician,
+          user_type: type,
+          this_musicican_logged_in: true,
+          token: token
+        }), () => this.setLocalStorage())
+    })}
+  }
+
+  setLocalStorage = () =>{
+    localStorage.setItem('user_id', this.state.user_id);
+    localStorage.setItem('current_user', this.state.current_user);
+    console.log('local storage set', this.state)
   }
   render(){
     return (
@@ -60,16 +88,17 @@ class App extends Component {
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/filter">Filter Container</Link></li>
         </ul> */}
-        <Route path="/band/show" render={(props)=> <BandDisplayContainer {...props} bandLoggedIn={this.state.band_logged_in}/>}/>
+        <Route path="/band/show" render={(props)=> <BandDisplayContainer {...props} {...this.state}  getProfile={this.getProfile}/>}/>
         <Route path="/band/new" render={()=><CreateBandForm getProfile={this.getProfile}/>}/>
         <Route path="/home" component={LandingPage}/>
         <Route path="/login" render={(props)=> <Login {...props} getProfile={this.getProfile}/>}/>
         <Route path="/filter" component={FilterContainer}/>
         <Route path="/musician/login" component={Facebook}/>
-        <Route path="/listings" component={ListingsPageContainer}/>
-        <Route path="/musician/show" component={MuscianDisplayContainer}/>
+        <Route path="/listings" render={(props)=> <ListingsPageContainer {...props} getProfile={this.getProfile}/>}/>
+        <Route path="/musician/show" render={(props)=> <MuscianDisplayContainer {...props} {...this.state}  getProfile={this.getProfile}/>}/>
         <Route path="/listing/new" component={CreateListingForm}/>
         <Route path="/musicians/new" component={CreateMusicianForm}/>
+        <Route path="/users/new" component={LandingPage}/>
         <Route path="/bands" component={BandsIndex}/>
 
       

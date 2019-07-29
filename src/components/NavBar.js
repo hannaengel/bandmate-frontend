@@ -41,72 +41,85 @@ export default class NavBar extends Component {
     }
 
     render() {
+      const userType = localStorage.getItem('type')
         return(
+          <React.Fragment>
+          {userType == 'band'?
             <div className='navbar-fixed-top'>
-               <div className="ui ten fluid item top attached menu borderless">
+               <div className="inverted gray ui five fluid item top attached menu ">
                 <div className="item">
 
                 <div className="item nav_link">
-                <NavLink to="/home" activeClassName="hurray">
+                <NavLink to="/login" activeClassName="hurray">
                 <img src={logo} alt='' />
                 </NavLink>
                 </div>
                 </div>
 
                 <div className='item'>
-                <NavLink to="/musician/show" activeClassName="hurray">
-                  Musician Profile
-                </NavLink>
-                </div>
-
-                <div className='item'>
                 <NavLink to="/band/show" >
+                <i className='user icon'></i>
                   Band Profile
                 </NavLink>
                 </div>
 
-                <div className='item'>
-                <NavLink to="/listings" activeClassName="hurray">
-                  Listings
-                </NavLink>
-                </div>
-
+      
                 <div className='item'>
                 <NavLink to="/listing/new" activeClassName="hurray">
                   Create Listing
                 </NavLink>
                 </div>
-
-                <div className='item'>
-                <NavLink to="/band/new" activeClassName="hurray">
-                  Create Band
-                </NavLink>
-                </div>
-
-                <div className='item'>
-                <NavLink to="/musicians/new" activeClassName="hurray">
-                  Create Musician
-                </NavLink>
-                </div>
-                <div className='item'>
-                <NavLink to="/bands" activeClassName="hurray">
-                  Bands Index
-                </NavLink>
-                </div>                
-           
-      
-               <div  className="item">
-                <i className='user icon'></i>
-                  current user
-                </div>
-
                 <div className="item">
                 <div onClick={this.logout} className="ui button">Log Out</div>
                </div>
             </div>
-
-
             </div>
+            :
+            <div className='navbar-fixed-top'>
+            <div className="inverted gray ui five fluid item top attached menu ">
+             <div className="item">
+
+             <div className="item nav_link">
+             <NavLink to="/login" activeClassName="hurray">
+             <img src={logo} alt='' />
+             </NavLink>
+             </div>
+             </div>
+
+             <div className='item'>
+             <NavLink to="/musician/show" activeClassName="hurray">
+             <i className='user icon'></i>
+             My Profile
+             </NavLink>
+             </div>
+
+             <div className='item'>
+             <NavLink to="/listings" activeClassName="hurray">
+               Listings
+             </NavLink>
+             </div>
+
+       
+
+             {/* <div className='item'>
+             <NavLink to="/musicians/new" activeClassName="hurray">
+               Create Musician
+             </NavLink>
+             </div> */}
+         
+             <div className='item'>
+             <NavLink to="/bands" activeClassName="hurray">
+               Bands Index
+             </NavLink>
+             </div>                      
+          <div className="item">
+             <div onClick={this.logout} className="ui button">Log Out</div>
+            </div>
+         </div>
+
+
+         </div>}
+          </React.Fragment>
         )
     }
 }

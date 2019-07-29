@@ -101,12 +101,12 @@ export default class CreateListingForm extends Component {
                         </Form.Field>
 
                         <Form.Field className='center-div-items'>
-                        <input className='ui submit blue button' type='submit' value='Create Listing' />
+                        <input className='ui submit orange button' type='submit' value='Create Listing' />
                         </Form.Field>
                         </Form>:
                         <div>
                             <h2>Your listing was posted! </h2>
-                            <button onClick={this.toggle} className='ui basic blue button'> Create Another Listing </button>
+                            <button onClick={this.toggle} className='ui orange button'> Create Another Listing </button>
                         </div>}
                 </div>
             </div>

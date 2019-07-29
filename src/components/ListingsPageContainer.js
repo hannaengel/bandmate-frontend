@@ -11,6 +11,7 @@ export default class ListingsPageContainer extends Component {
         super();
         this.state = {
             loading: true,
+            instruments_search: [],
             search: '', 
             listingsIndex: {
                 listings: [],
@@ -41,14 +42,18 @@ export default class ListingsPageContainer extends Component {
 
       updateInstruments = instruments =>{
         this.setState({
-            search: instruments
-         }, ()=> console.log('PARENT STATE', this.state));
+            instruments_search: instruments
+         }, ()=> console.log('PARENT STATE', this.state), this.getFilteredListings());
     }
 
       getFilteredListings = () =>{
-          const url = 'http://localhost:3000/api/v1/listings?search=' + this.state.search
-          console.log(url)
-          console.log(this.state.search)
+          const array = this.state.instruments_search
+          const page = this.state.listingsIndex.page
+          const instruments_search = array.join(' ')
+        const search = this.state.search
+          const url = 'http://localhost:3000/api/v1/listings/?page=' + page + '?search=' + search + '&instruments_search=' + instruments_search
+          console.log('URL: ', url)
+          
         fetch(url)
         .then(res=>res.json())
         .then(data => {this.setState(prevState => ({
@@ -62,10 +67,7 @@ export default class ListingsPageContainer extends Component {
         let gotopage = {activePage}
         let pagenum = gotopage.activePage
         let pagestring = pagenum.toString()
-        this.setState({
-            loading: true
-        })
-
+    
         const url = "http://localhost:3000/api/v1/listings/?page=" + pagestring
         fetch(url)
             .then(res=>res.json())
