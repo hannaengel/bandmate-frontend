@@ -7,7 +7,9 @@ import Bio from './band-show-components/Bio'
 import Spotify from './band-show-components/Spotify';
 import BandListingsDiv from './band-show-components/BandListingsDiv';
 import Soundcloud from './band-show-components/Soundcloud';
-export default class BandDisplayContainer extends Component {
+import BandLoaderHOC from '../HOC/BandLoaderHOC'
+
+class BandDisplayContainer extends Component {
 
     constructor() {
         super();
@@ -43,18 +45,18 @@ export default class BandDisplayContainer extends Component {
 
     }
     
-    fetchBand = () => {
-            const seeBand = this.props.seeBand
-            const url = 'http://localhost:3000/api/v1/bands/' + seeBand
-            console.log('in fetch bands', url, seeBand)
-            return fetch(url)
-            .then(res=>res.json())
-            .then(data => {this.setState(prevState => ({
-                band: data.band,
-                loaded: true
-            }), ()=> console.log('seeing band as musician ',this.state, url))}
-            );
-        }
+    // fetchBand = () => {
+    //         const seeBand = this.props.seeBand
+    //         const url = 'http://localhost:3000/api/v1/bands/' + seeBand
+    //         console.log('in fetch bands', url, seeBand)
+    //         return fetch(url)
+    //         .then(res=>res.json())
+    //         .then(data => {this.setState(prevState => ({
+    //             band: data.band,
+    //             loaded: true
+    //         }), ()=> console.log('seeing band as musician ',this.state, url))}
+    //         );
+    //     }
 
         fetchLoggedInBand = () => {
             const seeBand = this.props.current_user.id
@@ -262,13 +264,12 @@ export default class BandDisplayContainer extends Component {
     
 
     render() {
-
-        if (this.state.loaded===true){
-            return this.renderBandInfo();
-        }else{
-            return this.renderLoadingScreen()
-            // return null
-        }
+        return this.renderBandInfo()
+        // if (this.state.loaded===true){
+        //     return this.renderBandInfo();
+        // }else{
+        //     return this.renderLoadingScreen()
+        // }
     //    if (!this.props.seeBand){
     //     if (this.props.current_user) {
     //     this.setState(prevState => ({
@@ -285,3 +286,5 @@ export default class BandDisplayContainer extends Component {
     //     }
     }
 }
+
+export default BandLoaderHOC(BandDisplayContainer)

@@ -24,7 +24,8 @@ export default class BandsIndex extends Component {
             id: null
         }), ()=> console.log(this.state))
     }
-    
+
+   
         
     getFilteredListings = () =>{
         const url = 'http://localhost:3000/api/v1/bands'
