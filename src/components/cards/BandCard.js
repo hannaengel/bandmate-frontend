@@ -3,10 +3,7 @@ import { Card } from 'semantic-ui-react'
 import BandDisplayContainer from '../MusicianDisplayContainer';
 
 export default class BandCard extends Component {
-
-   
-
-
+  
     toBandProfile = () =>{
       
      this.props.displayBand(this.props.band.id)

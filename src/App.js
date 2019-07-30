@@ -11,9 +11,9 @@ import BandDisplayContainer from './components/BandDisplayContainer';
 import ListingsPageContainer from './components/ListingsPageContainer';
 import MuscianDisplayContainer from './components/MusicianDisplayContainer';
 import CreateListingForm  from './components/CreateListingForm';
-import CreateMusicianForm  from './components/CreateMusicianForm';
+import CreateMusicianForm  from './components/CreateMusicianForm'
+import MusiciansIndex from './components/MusiciansIndex';
 import Navbar from './components/NavBar'
-
 import BandsIndex from './components/BandsIndex';
 
 
@@ -74,7 +74,6 @@ class App extends Component {
 
   setLocalStorage = () =>{
     localStorage.setItem('user_id', this.state.user_id);
-    localStorage.setItem('current_user', this.state.current_user);
     console.log('local storage set', this.state)
   }
   render(){
@@ -101,6 +100,7 @@ class App extends Component {
         <Route path="/listing/new" component={CreateListingForm}/>
         <Route path="/musicians/new" component={CreateMusicianForm}/>
         <Route path="/bands" component={BandsIndex}/>
+        <Route path="/musicians" component={MusiciansIndex}/>
 
       
       </div>

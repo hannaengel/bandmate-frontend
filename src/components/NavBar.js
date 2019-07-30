@@ -63,6 +63,20 @@ export default class NavBar extends Component {
                 </NavLink>
                 </div>
 
+                <div className='item'>
+                <NavLink to="/bands" >
+                <i className='user icon'></i>
+                  Bands Index
+                </NavLink>
+                </div>
+
+                <div className='item'>
+                <NavLink to="/musicians" >
+                <i className='user icon'></i>
+                  Musicians Index
+                </NavLink>
+                </div>
+
       
                 <div className='item'>
                 <NavLink to="/listing/new" activeClassName="hurray">
@@ -94,24 +108,26 @@ export default class NavBar extends Component {
              </div>
 
              <div className='item'>
+                <NavLink to="/bands" >
+                <i className='user icon'></i>
+                  Bands Index
+                </NavLink>
+                </div>
+
+                <div className='item'>
+                <NavLink to="/musicians" >
+                <i className='user icon'></i>
+                  Musicians Index
+                </NavLink>
+                </div>
+
+             <div className='item'>
              <NavLink to="/listings" activeClassName="hurray">
                Listings
              </NavLink>
              </div>
 
-       
-
-             {/* <div className='item'>
-             <NavLink to="/musicians/new" activeClassName="hurray">
-               Create Musician
-             </NavLink>
-             </div> */}
-         
-             <div className='item'>
-             <NavLink to="/bands" activeClassName="hurray">
-               Bands Index
-             </NavLink>
-             </div>                      
+                           
           <div className="item">
              <div onClick={this.logout} className="ui button">Log Out</div>
             </div>

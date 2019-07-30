@@ -37,49 +37,34 @@ class BandDisplayContainer extends Component {
     }
 
      componentDidMount(){
-        if (this.props.seeBand) {
-                this.fetchBand();
-            }else if (this.props.this_band_logged_in){
+        if (this.props.this_band_logged_in){
             this.fetchLoggedInBand()
-            }
-
+        }
     }
     
-    // fetchBand = () => {
-    //         const seeBand = this.props.seeBand
-    //         const url = 'http://localhost:3000/api/v1/bands/' + seeBand
-    //         console.log('in fetch bands', url, seeBand)
-    //         return fetch(url)
-    //         .then(res=>res.json())
-    //         .then(data => {this.setState(prevState => ({
-    //             band: data.band,
-    //             loaded: true
-    //         }), ()=> console.log('seeing band as musician ',this.state, url))}
-    //         );
-    //     }
-
-        fetchLoggedInBand = () => {
-            const seeBand = this.props.current_user.id
-            const url = 'http://localhost:3000/api/v1/bands/' + seeBand
-            console.log('in fetch bands', url, seeBand)
-            return fetch(url)
-            .then(res=>res.json())
-            .then(data => {this.setState(prevState => ({
-                band: data.band,
-                loaded: true
-            }), ()=> console.log('seeing band as musician ',this.state, url))}
-            );
-        }
-
-
+    
+    fetchLoggedInBand = () => {
+        const id = this.props.current_user.id
+        const url = 'http://localhost:3000/api/v1/bands/' + id
+        console.log('in fetch bands', url, id)
+        return fetch(url)
+        .then(res=>res.json())
+        .then(data => {this.setState(prevState => ({
+            band: data.band
+        }), ()=> console.log('seeing band as musician ',this.state, url))}
+        );
+    }
 
     handleClick = event => {
-        const type = event.target.name
-        if (type == 'instagram'){
+        event.preventDefault()
+        console.log(event.target.name)
+        const name = event.target.name
+        if (name == 'instagram' && this.state.band.instagram!==''){
             window.open(this.state.band.instagram, '_blank')
-        }else{
+        }
+        if (name == 'facebook' && this.state.band.facebook!==''){
             window.open(this.state.band.facebook, '_blank')
-        }       
+        }  
     }
 
     handleEditClick = () =>{
@@ -245,45 +230,8 @@ class BandDisplayContainer extends Component {
         )
     }
 
-    renderLoadingScreen = () =>{
-        return (<div>
-        Hold on, it's loading!
-      </div>)
-    }
-
-    //  render() {
-        // if (this.props.current_user) {
-        //     this.renderBandInfo()
-        // } else if (this.props.seeBand) {
-            // this.fetchBand()
-// } else {
-//     this.renderLoadingScreen()
-// }
-
-
-    
-
     render() {
         return this.renderBandInfo()
-        // if (this.state.loaded===true){
-        //     return this.renderBandInfo();
-        // }else{
-        //     return this.renderLoadingScreen()
-        // }
-    //    if (!this.props.seeBand){
-    //     if (this.props.current_user) {
-    //     this.setState(prevState => ({
-    //             band: this.props.current_user,
-    //             this_band_logged_in: true,
-    //         }), ()=> console.log('state fetch bands after band ',this.state));
-    //         return this.renderBandInfo();
-
-    // }else if (this.props.seeBand) {
-    //         this.fetchBand();
-    //         return this.renderBandInfo()
-    //  } else {
-    //         return this.renderLoadingScreen()
-    //     }
     }
 }
 

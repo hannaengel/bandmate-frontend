@@ -6,7 +6,8 @@ class Api::V1::MusiciansController < ApplicationController
     end
   
     def show 
-      render json: { musician: MusicianSerializer.new(current_user) }, status: :accepted
+      @musician = Musician.find(params[:id])
+      render json: { musician: MusicianSerializer.new(@musician) }, status: :accepted
     end
 
     def create
