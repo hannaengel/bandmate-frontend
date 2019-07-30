@@ -3,7 +3,7 @@ import NavBar from './NavBar.js'
 import BandCard from './cards/BandCard.js'
 import { Header } from 'semantic-ui-react'
 import BandDisplayContainer from './BandDisplayContainer.js';
-
+import icon from '../images/icon.png'
 export default class BandsIndex extends Component {
     state = {bands: [], view_one: false, id: null}
 
@@ -51,9 +51,10 @@ export default class BandsIndex extends Component {
                 :
                 <React.Fragment>
                 <NavBar />
-                <div>
-                <Header className='dividing'>Bands</Header>
-                </div>
+                <h1 class="ui large dividing center aligned icon header">
+                <img class="ui large circular image" src={icon}/>
+                Bands
+                </h1>
                 <div class="ui four column grid">
                 {this.state.bands.map((band) => {
                     return   <div className="column"><BandCard displayBand={this.displayBand} key={band.id}  viewBand={this.state.viewBand} band={band}/></div>

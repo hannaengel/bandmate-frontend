@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 export default class ChoiceModal extends Component {
 
-//state here
+
     render() {
         return( 
           

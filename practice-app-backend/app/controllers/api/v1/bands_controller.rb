@@ -8,7 +8,6 @@ class Api::V1::BandsController < ApplicationController
     def show 
       @band = Band.find(params[:id]) 
       if @band
-        # byebug
         render json: { band: BandSerializer.new(@band) }, status: :accepted
       else
         render json: { error: @band.errors }, status: :not_acceptable

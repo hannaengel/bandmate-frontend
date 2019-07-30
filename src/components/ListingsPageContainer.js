@@ -3,6 +3,7 @@ import ListingAccordian from '/Users/hannaengel/Development/projects/practice-ap
 import FilterContainer from './listings-components/filter-components/FilterContainer.js'
 import { Header, Pagination } from 'semantic-ui-react'
 import NavBar from './NavBar.js'
+import BandDisplayContainer from './BandDisplayContainer.js'
 export default class ListingsPageContainer extends Component {
 
 
@@ -13,32 +14,45 @@ export default class ListingsPageContainer extends Component {
             loading: true,
             instruments_search: [],
             search: '', 
-            listingsIndex: {
-                listings: [],
-                page:'',
-                pages: ''
+            listings: [],
+            view_one: false, 
+            id: null,
+            page: 1,
+            totalPages: 3
             }
-        };
     }
 
     componentDidMount(){
           fetch('http://localhost:3000/api/v1/listings')
               .then(res=>res.json())
               .then(data => {this.setState(prevState => ({
-                    loading: false,
-                    listingsIndex: data
-                }), ()=> console.log(this.state.listingsIndex))}
-            );
+                   listings: data
+                }), () => console.log(data))}
+          );
       }
 
       handleFilter = search =>{
-          console.log('search', search)
+          
           this.setState(prevState => ({
               search: search
           }))
 
          this.getFilteredListings()
       }
+
+     displayBand = (id) =>{
+      this.setState(prevState => ({
+        view_one: true,
+        id: id
+        }), ()=> console.log('in parent function', this.state))
+    }
+    returnToListings = () =>{
+        this.setState(prevState => ({
+            view_one: false,
+            id: null
+        }), ()=> console.log(this.state))
+    }
+
 
       updateInstruments = instruments =>{
         this.setState({
@@ -66,39 +80,50 @@ export default class ListingsPageContainer extends Component {
     handlePage = (e, {activePage}) => {
         let gotopage = {activePage}
         let pagenum = gotopage.activePage
+        console.log('page num', pagenum)
         let pagestring = pagenum.toString()
-    
-        const url = "http://localhost:3000/api/v1/listings/?page=" + pagestring
-        fetch(url)
-            .then(res=>res.json())
-            .then(data => {this.setState(prevState => ({
-                loading: false,
-                listingsIndex: data
-            }), ()=> console.log(this.state.listingsIndex))}
-        );
+        console.log('page string', pagestring)
+        // const url = "http://localhost:3000/api/v1/listings/?page=" + pagestring
+        // fetch(url)
+        //     .then(res=>res.json())
+        //     .then(data => {this.setState(prevState => ({
+        //         loading: false,
+        //         listingsIndex: data
+        //     }), ()=> console.log(this.state.listingsIndex))}
+        // );
     }
 
     render(){
         return(
             <React.Fragment>
+            
             <NavBar />
+           
+            {this.state.view_one==true?
+                <React.Fragment>
+                    <button onClick={this.returnToListings} className="ui labeled icon button">
+                        <i class="left chevron icon"></i>
+                        Back
+                    </button>
+                <BandDisplayContainer seeBand={this.state.id} />
+                </React.Fragment>  
+                :
             <div className='band-profile-div'>
                 
                  <Header as='h1' className='dividing'> Browse Listings </Header>
                 <div className='ui grid container'>
                     <div className='six wide column'>
                         <FilterContainer updateInstruments={this.updateInstruments} onFilter={this.handleFilter}/>
-                       
-                    </div>
+                     </div>
                     <div className='ten wide column'>
-                    <ListingAccordian listingsIndex={this.state.listingsIndex}/> 
+                    <ListingAccordian onDisplayBand={this.displayBand} listings={this.state.listings}/> 
 
-                        <Pagination onPageChange={this.handlePage} size='mini' siblingRange='6'
-                        defaultActivePage={this.state.listingsIndex.page} 
-                        totalPages={this.state.listingsIndex.pages} />
+                        <Pagination onPageChange={this.handlePage} size='mini' siblingRange='3'
+                        defaultActivePage={this.state.page} 
+                        totalPages={this.state.pages} /> 
                      </div>
                 </div>
-            </div>
+            </div>}
             </React.Fragment>
         )
     }

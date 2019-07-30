@@ -219,7 +219,7 @@ export default class CreateBandForm extends Component {
              <div class="row">
                     <div class="column center-div-items">
                         <Form.Field>
-                        <input className='ui button' type='submit' value='create musician' />
+                        <input className='ui orange button' type='submit' value='create musician' />
                             {/* <Button onClick={this.backToLogin}>Return to Login</Button> */}
                         </Form.Field>
                     </div>

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Form } from 'semantic-ui-react'
+import { Form, Modal } from 'semantic-ui-react'
 import NavBar from './NavBar'
 import { Link } from 'react-router-dom'
 import logo from '../images/sized-logo.png'
-import ChoiceModal from './ChoiceModal.js'
+
 export default class LoginForm extends Component {
 
     state = {
@@ -23,6 +23,14 @@ export default class LoginForm extends Component {
         this.username = React.createRef()
         this.password = React.createRef()
 
+    }
+
+    musicianSignUp = () =>{
+        this.props.history.push('/musicians/new');
+    }
+
+    bandSignUp = () =>{
+        this.props.history.push('/bands/new');
     }
 
     getToken(jwt) {
@@ -62,10 +70,11 @@ export default class LoginForm extends Component {
                 if (json && json.jwt)
                  {this.saveToken(json.jwt);
                
-                this.props.getProfile()
+                console.log('This is json . user', json.user)
+                this.props.getProfile(json.user.id)
                 this.props.history.push('/' + userType + '/show');} 
             else{
-                 console.log('didnt recieve token and profile back in login, Login.js:', json)
+                window.alert("Your username and/or password is incorrect please try again");
                 }
             })
     }
@@ -108,8 +117,22 @@ export default class LoginForm extends Component {
            
                 <article className ='login shadow'>
                 <img src={logo} alt='' />
-                <p>Not a member? <a onClick={this.showModal} className='coral-text'>Sign Up</a></p>
-                <ChoiceModal show={this.state.show} handleClose={this.hideModal} />
+                <p>Not a member? 
+              
+                <Modal className='modal' basic trigger={<a className='coral-text'>Sign Up</a>}>
+                    <Modal.Header><h2 className='black-text'>Sign up as a...</h2></Modal.Header>
+                    <Modal.Content>
+            
+                    <Modal.Description>
+                        <div className='center-div-items'>
+                        <button className='ui orange huge button' onClick={this.bandSignUp}> Band </button>
+                        <button className='ui orange huge button' onClick={this.musicianSignUp}> Musician </button>
+                        </div>
+                    </Modal.Description>
+                    </Modal.Content>
+                </Modal>
+                </p>
+               
                 <Form onSubmit={this.login}>
                     <Form.Field onChange={this.handleChange}>
                      <label className='white-text' >Username</label>
@@ -125,7 +148,7 @@ export default class LoginForm extends Component {
                         <label className='white-text'>Log in as...</label>
                         <div class="field">
                         <div onChange={this.handleChange} class="ui radio checkbox">
-                            <input value='musician' type="radio" name="type" checked="checked"/>
+                            <input value='musician' type="radio" name="type" />
                             <label className='white-text'>Musician</label>
                         </div>
                         </div>

@@ -18,13 +18,18 @@ class Api::V1::ListingsController < ApplicationController
         #     render json:{
         #       listings: @listings}
         #  else
-          @listings = Listing.paginate(:page => params[:page])
-            render json:{
-            listings: @listings,
-             page: @listings.current_page,
-             pages: @listings.total_pages}
-        # end 
-      end 
+        # if params[:search]
+          # @search = params[:search]
+          # if @search == 'oldest'
+            # @listings = Listing.page(params[:page]).order('created_at ASC')
+          # else
+          @listings = Listing.page(params[:page]).order('created_at DESC')
+          #  @listings = Listing.paginate(:page => params[:page])
+          render json: @listings, 
+          each_serializer: ListingSerializer
+          end
+    
+
   
       def update
         @listing = Listing.find(listing_params[:id])

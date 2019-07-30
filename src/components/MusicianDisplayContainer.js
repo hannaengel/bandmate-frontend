@@ -46,7 +46,6 @@ export default class BandDisplayContainer extends Component {
     //   }
 
       componentDidMount(){
-          this.props.getProfile()
           this.fetchMusicians()
     }
     fetchMusicians = () =>{

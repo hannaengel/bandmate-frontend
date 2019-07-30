@@ -126,3 +126,21 @@ box-shadow: -10px 21px 36px -16px rgba(0,0,0,0.42);}
   font-family: 'Roboto', sans-serif !important;
   font-size: 15px !important;
 }
+
+.black-text{
+  color: black !important;
+  text-align: center;
+  font-size: 30px !important;
+}
+
+.modal{
+  background-color: whitesmoke !important;
+  text-align: center;
+}
+
+
+
+.dimmed.dimmable > .ui.modals.dimmer.visible {
+  display: flex !important;
+
+}

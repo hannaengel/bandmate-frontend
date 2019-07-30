@@ -212,7 +212,7 @@ export default class CreateBandForm extends Component {
                     </div>
                     <div className='row center-div-items'>
                        <Form.Field>
-                        <input className='ui button' type='submit' value='Create Band' />
+                        <input className='ui orange button' type='submit' value='Create Band' />
                         </Form.Field>
                      </div>
 

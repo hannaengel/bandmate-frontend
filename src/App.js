@@ -33,12 +33,14 @@ class App extends Component {
       this_musicican_logged_in: false
     };
   }
-  getProfile = () => {
+
+ 
+  getProfile = (id) => {
      let token = localStorage.getItem("jwt")
      let type = localStorage.getItem("type")
      console.log(token)
      if (type == 'band'){
-        fetch('http://localhost:3000/api/v1/bands/profile', {
+        fetch('http://localhost:3000/api/v1/bands/' + id, {
           headers: {
             'Authorization': 'Bearer ' + token
           }
@@ -46,14 +48,14 @@ class App extends Component {
         .then(res=>res.json())
         .then(json=> {
           this.setState(prevState => ({
+            this_band_logged_in: true,
             logged_in: true,
             current_user: json.band,
             token: token,
-            this_band_logged_in: true,
             user_type: type
           }), () => this.setLocalStorage())
         })}else{
-      fetch('http://localhost:3000/api/v1/musicians/profile', {
+      fetch('http://localhost:3000/api/v1/musicians/' + id, {
         headers: {
           'Authorization': 'Bearer ' + token
         }
@@ -89,7 +91,7 @@ class App extends Component {
           <li><Link to="/filter">Filter Container</Link></li>
         </ul> */}
         <Route path="/band/show" render={(props)=> <BandDisplayContainer {...props} {...this.state}  getProfile={this.getProfile}/>}/>
-        <Route path="/band/new" render={()=><CreateBandForm getProfile={this.getProfile}/>}/>
+        <Route path="/bands/new" render={()=><CreateBandForm getProfile={this.getProfile}/>}/>
         <Route path="/home" component={LandingPage}/>
         <Route path="/login" render={(props)=> <Login {...props} getProfile={this.getProfile}/>}/>
         <Route path="/filter" component={FilterContainer}/>
@@ -98,7 +100,6 @@ class App extends Component {
         <Route path="/musician/show" render={(props)=> <MuscianDisplayContainer {...props} {...this.state}  getProfile={this.getProfile}/>}/>
         <Route path="/listing/new" component={CreateListingForm}/>
         <Route path="/musicians/new" component={CreateMusicianForm}/>
-        <Route path="/users/new" component={LandingPage}/>
         <Route path="/bands" component={BandsIndex}/>
 
       
