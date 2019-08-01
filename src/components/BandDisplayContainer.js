@@ -170,14 +170,23 @@ class BandDisplayContainer extends Component {
             <NavBar />
 
             {this.state.viewMode.editView==false? 
-            <div className='shadow'>
-            {this.props.this_band_logged_in==true?
-            <button className='ui orange button' onClick={this.handleEditClick}>  <i class="edit icon"></i>Click for Edit Mode </button> 
-            :null}
-            <Header className='dividing'>Band</Header>
-            </div>
+             <div onClick={this.handleEditClick} className='shadow teal-header'>
+             <h4 class="ui icon header center aligned">
+                        <h1 className='big-white-text'>My Band Profile<i className='users icon'></i>
+                        </h1>
+             </h4>
+             <div class="sub header right aligned teal">
+             <button className='ui small teal button' >  <i class="edit icon"></i>Click for Edit Mode </button> 
+              </div>
+         </div>
             :
-            <button className ='ui submit orange button' onClick={this.handleSubmit}> Submit Edits </button>}
+            <div onClick={this.handleSubmit} className='shadow teal-header'>
+            <h4 class="ui header center aligned teal">
+              <div class="sub header">
+                   <button className ='ui small teal button' name='submit'> <i class="huge save icon"></i>Submit Edits </button>
+                 </div>
+            </h4>
+        </div>}
             <div className='band-profile-div'>
             <div class="ui relaxed grid">
                 <Grid.Row stretched>
@@ -238,7 +247,6 @@ class BandDisplayContainer extends Component {
                     </div>
                 </Grid.Row>: 
                 <Grid.Row stretched>
-                    
                         <div class="six wide column">
                             <Form.Field  onChange={this.handleChange}>
                             <label >

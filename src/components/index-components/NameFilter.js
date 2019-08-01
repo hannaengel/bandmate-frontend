@@ -15,14 +15,16 @@ export default class NameFilter extends Component {
     }
 
     render() {
-        return(          
-        <div onChange={this.handleChange} class="ui search">
-            <div class="ui icon input">
-                <input class="prompt" type="text" placeholder="Search name..."/>
-                <i class="search icon"></i>
-                </div>
-            <div class="results"></div>
-        </div>
+        return(    
+        <div className='search-names'>     
+            <div onChange={this.handleChange} class="ui fluid search">
+                <div class="ui icon input">
+                    <input class="prompt" type="text" placeholder="Search name..."/>
+                    <i class="search icon"></i>
+                    </div>
+                <div class="results"></div>
+            </div>
+        </div> 
         )
     }
 }

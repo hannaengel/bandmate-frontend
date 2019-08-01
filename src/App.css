@@ -149,6 +149,15 @@ box-shadow: -10px 21px 36px -16px rgba(0,0,0,0.42);}
   text-align: center;
 }
 
+.search-names{
+  vertical-align: middle !important;
+  background-color:  #grey;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #cde7f0;
+}
+
 .musicians-white-header{
   vertical-align: middle !important;
   background-color:  #eef7fa;

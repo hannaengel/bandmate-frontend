@@ -46,15 +46,11 @@ export default class NavBar extends Component {
           <React.Fragment>
           {userType == 'band'?
             <div className='navbar-fixed-top'>
-               <div className="inverted gray ui six fluid item top attached menu ">
-                <div className="item">
-
-                <div className="item nav_link">
-                <NavLink to="/login" activeClassName="hurray">
-                <img src={logo} alt='' />
-                </NavLink>
-                </div>
-                </div>
+               <div className="inverted nav ui six fluid item top attached menu ">
+                
+               <div className="item">   
+             <img class="ui small bordered image" src={logo}/>
+             </div>
 
                 <div className='item'>
                 <NavLink to="/band/show" >
@@ -64,22 +60,22 @@ export default class NavBar extends Component {
                 </div>
 
                 <div className='item'>
-                <NavLink to="/bands" >
-                <i className='user icon'></i>
-                  Bands 
+                <NavLink to="/indexbands" >
+                <i className='music icon'></i>
+                  Browse Bands 
                 </NavLink>
                 </div>
 
                 <div className='item'>
-                <NavLink to="/musicians" >
-                <i className='user icon'></i>
-                  Musicians 
+                <NavLink to="/indexmusicians" >
+                <i className='users icon'></i>
+                  Browse Musicians 
                 </NavLink>
                 </div>
-
       
                 <div className='item'>
                 <NavLink to="/listing/new" activeClassName="hurray">
+                <i className='pencil icon'></i>
                   Create Listing
                 </NavLink>
                 </div>

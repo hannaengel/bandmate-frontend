@@ -107,7 +107,7 @@ export default class MusiciansIndex extends Component {
                     <Menu.Menu position='left'>
                         {this.state.rangeStart >19?
                         <Menu.Item>
-                        <button className='semantic ui teal big button' onClick={this.handlePreviousPage}>
+                        <button className='semantic ui big button' onClick={this.handlePreviousPage}>
                                 <i className='left arrow icon'>
                                  </i>
                          </button>
@@ -118,7 +118,7 @@ export default class MusiciansIndex extends Component {
                         <Menu.Menu position='right'>
                         {this.state.musicians.length===20?
                         <Menu.Item>
-                            <button className='semantic ui teal big button' onClick={this.handleNextPage}>
+                            <button className='semantic ui big button' onClick={this.handleNextPage}>
                                 <i className='right arrow icon'>
                                  </i>
                              </button>
