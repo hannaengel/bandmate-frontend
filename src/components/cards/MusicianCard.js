@@ -15,7 +15,9 @@ export default class MusicianCard extends Component {
         <React.Fragment>
             <div class="ui raised card">
                 <div onClick={this.toMusicianProfile} class="ui image">
+                <div className='card-image'>
                     <img src={musician.image_url}/>
+                </div>
                 </div>
                 <div class="content">
                     <a onClick={this.toMusicianProfile} class="header">{musician.name}</a>

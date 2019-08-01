@@ -10,24 +10,24 @@ class Api::V1::ListingsController < ApplicationController
          end
       end
   
-      def index
-        
-        #   if params[:search]
-        #     @search = params[:search]
-        #       @listings = Listing.where("title LIKE ?", "%#{params[:search]}%") && Listing.where("instruments LIKE ?", "%#{params[:search]}%")
-        #     render json:{
-        #       listings: @listings}
-        #  else
-        # if params[:search]
-          # @search = params[:search]
-          # if @search == 'oldest'
-            # @listings = Listing.page(params[:page]).order('created_at ASC')
-          # else
-          @listings = Listing.page(params[:page]).order('created_at DESC')
-          #  @listings = Listing.paginate(:page => params[:page])
-          render json: @listings, 
-          each_serializer: ListingSerializer
-          end
+      def index  
+      
+        if params[:search]
+            @search = params[:search]
+            @listings = Listing.where("title LIKE ?", "%#{params[:search]}%") && Listing.where("instruments LIKE ?", "%#{params[:search]}%")&& Listing.where("description LIKE ?", "%#{params[:search]}%")
+        elsif params[:instruments_search] && params[:instruments_search] != ''
+          input = params[:instruments_search]
+          search_words = input.split(' ')
+          @listings = []
+             search_words.each do |word| 
+              @listings = Listing.where("instruments LIKE ?", "%#{word}%") 
+            end 
+        else
+            @listings = Listing.all.order('created_at DESC')
+          end 
+        render json: @listings, 
+        each_serializer: ListingSerializer
+      end
     
 
   

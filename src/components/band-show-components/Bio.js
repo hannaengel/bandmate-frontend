@@ -7,17 +7,32 @@ export default class Bio extends Component {
         this.props.onClick(e)
     }
     render() {
-        const {name, email, genre, instruments, bio} = this.props.band
+        const {name, email, genres, instruments, bio} = this.props.band
+       
         return( 
             <div className="ui segment">
                 <h1>{name}</h1>
-                <p className="sub header">Instruments: {instruments}</p>
-                <p className="sub header">Genre: {genre}</p>
-                <div className="ui divider"></div>
-                <p>Bio: {bio}
+                <h4>Instruments</h4>
+                <p> 
+                {instruments?
+                instruments:
+                null}
                 </p>
                 <div className="ui divider"></div>
-                <h4>Email: {email}</h4>
+                <React.Fragment>
+                <h4>Genre</h4>
+                {genres?
+                genres:
+                null}
+                <div className="ui divider"></div>
+                </React.Fragment>
+           
+               
+                <h4>Bio</h4>
+                    <p>{bio} </p>
+                <div className="ui divider"></div>
+                <h4>Email</h4>
+                <p>{email}</p>
                 <div className="ui divider"></div>
                     <Button name='instagram' onClick={this.handleClick} color='instagram'>
                         <Icon name='instagram' /> Instagram

@@ -29,7 +29,7 @@ export default class InstrumentSelector extends Component {
     render() {
         return( 
             <div>
-                            <select onChange={this.handleChange} multiple="" class="ui dropdown">
+                            <select onChange={this.handleChange} multiple="" class="ui fluid dropdown">
                             <option value="">Select Instruments</option>
                             <option value="accordian">Accordian</option>
                             <option value="banjo">Banjo</option>

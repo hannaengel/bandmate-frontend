@@ -7,6 +7,8 @@ import Bio from './band-show-components/Bio'
 import Spotify from './band-show-components/Spotify';
 import Soundcloud from './band-show-components/Soundcloud';
 import BandLoaderHOC from '../HOC/BandLoaderHOC'
+import InstrumentsSelector from './select-components/InstrumentsSelector.js'
+import GenresSelector from './select-components/GenresSelector'
 
 class MusicianDisplayContainer extends Component {
 
@@ -21,8 +23,8 @@ class MusicianDisplayContainer extends Component {
                 image_url: '',
                 bio: '',
                 soundcloud: '',
-                instruments : '',
-                genre: '',
+                instruments : [],
+                genres: [],
                 facebook: '',
                 instagram: '',
                 spotify: ''        
@@ -39,6 +41,18 @@ class MusicianDisplayContainer extends Component {
             this.fetchLoggedInMusician()
     }
 
+    updateInstruments = instruments =>{
+        this.setState(prevState => ({
+            musician: {...this.state.musician, instruments: instruments}
+        }), ()=> console.log(this.state.musician))
+    }
+
+    updateGenres = genres =>{
+        this.setState(prevState => ({
+            musician: {...this.state.musician, genres: genres}
+        }), ()=> console.log(this.state.musician))
+    }
+
 
     fetchLoggedInMusician = () => {
         console.log('in fetch logged in musician, props are these', this.props.current_user)
@@ -48,7 +62,7 @@ class MusicianDisplayContainer extends Component {
         return fetch(url)
         .then(res=>res.json())
         .then(data => {this.setState(prevState => ({
-            musicican: data.musician
+            musician: data.musician
         }), ()=> console.log('seeing band as musician ',this.state, url))}
         );
     }
@@ -74,7 +88,19 @@ class MusicianDisplayContainer extends Component {
         console.log('inside handle edit submit', this.state.musician)
         const id = this.props.current_user.id
         const url = `http://localhost:3000/api/v1/musicians/${id}`
-        const musician = this.state.musician
+        const {username, email, name, spotify, soundcloud, instagram, facebook, image_url, bio} = this.state.musician
+        let instruments;
+        let genres;
+            if (Array.isArray(this.state.musician.instruments)){
+            instruments = this.state.musician.instruments.join(' ')
+            }else{
+            instruments = this.state.musician.instruments
+            } 
+            if (Array.isArray(this.state.musician.genres)){
+            genres = this.state.musician.genres.join(' ')
+            }else{
+            genres = this.state.musician.genres
+            }
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -82,7 +108,20 @@ class MusicianDisplayContainer extends Component {
             'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify({
-             musician: musician
+                musician: {
+                    id: id,
+                    username: username,
+                    email: email,
+                    name: name,
+                    instruments: instruments,
+                    genres: genres,
+                    spotify: spotify,
+                    soundcloud: soundcloud,
+                    instagram: instagram,
+                    facebook: facebook,
+                    image_url: image_url,
+                    bio: bio
+                }
             })
         })
       .then(res=>res.json())
@@ -101,17 +140,33 @@ class MusicianDisplayContainer extends Component {
     }
 
     renderMusicianInfo = () =>{
-        const {facebook, instagram, name, email, bio, instruments, genre, image_url, spotify, soundcloud} = this.state.musician
+        const {facebook, instagram, name, email, bio, instruments, genres, image_url, spotify, soundcloud} = this.state.musician
         return (
         <React.Fragment> 
+            <div className='background'>
         <form className="ui form">
         <NavBar />
+
         {this.state.viewMode.editView==false? 
-        <div>
-        <button className='ui teal button' onClick={this.handleEditClick}>  <i class="edit icon"></i>Click for Edit Mode </button> 
-        <Header className='dividing'>Musician</Header>
-        </div>:
-        <button className ='ui submit button' name='submit' onClick={this.handleSubmit}> Submit Edits </button>}
+        <div onClick={this.handleEditClick} className='shadow teal-header'>
+            <h4 class="ui icon header center aligned">
+                       <h1 className='big-white-text'>My Profile<i className='user icon'></i>
+                       </h1>
+            </h4>
+            <div class="sub header right aligned teal">
+            <button className='ui small teal button' >  <i class="edit icon"></i>Click for Edit Mode </button> 
+             </div>
+        </div>
+        :
+        <div onClick={this.handleSubmit} className='shadow teal-header'>
+            <h4 class="ui header center aligned teal">
+              <div class="sub header">
+                   <button className ='ui small teal button' name='submit'> <i class="huge save icon"></i>Submit Edits </button>
+                 </div>
+            </h4>
+        </div>
+        }
+
         <div className='band-profile-div'>
         <div className="ui relaxed grid">
             <Grid.Row stretched>
@@ -184,6 +239,11 @@ class MusicianDisplayContainer extends Component {
                             Spotify </label>
                         <input type="text" placeholder={spotify}  name='spotify' />
                     </Form.Field>
+                    <Form.Field id='genres'>
+                            <label>Genre(s) Needed</label>
+                          <GenresSelector updateGenres={this.updateGenres}/>
+                        </Form.Field> 
+                    
                     </div>
                     <div className="eight wide column">
                         <Form.Field  onChange={this.handleChange}>
@@ -192,6 +252,10 @@ class MusicianDisplayContainer extends Component {
                             Soundcloud </label>
                         <input type="text" placeholder={soundcloud}  name='soundcloud' />
                     </Form.Field>
+                    <Form.Field id='instruments'>
+                            <label>Instruments</label>
+                          <InstrumentsSelector updateInstruments={this.updateInstruments}/>
+                        </Form.Field> 
                     </div>
                  </React.Fragment>
                 }
@@ -199,6 +263,7 @@ class MusicianDisplayContainer extends Component {
             </div>
         </div> 
     </form>
+    </div>
     </React.Fragment>)
     }
 

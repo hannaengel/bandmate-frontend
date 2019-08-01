@@ -4,7 +4,6 @@ import NavBar from './NavBar'
 import{ Link } from 'react-router-dom'
 import InstrumentsSelector from './select-components/InstrumentsSelector.js'
 import GenresSelector from './select-components/GenresSelector.js'
-
 export default class CreateBandForm extends Component {
 
     constructor() {
@@ -84,7 +83,6 @@ export default class CreateBandForm extends Component {
                 const token =  data.jwt
                 localStorage.setItem('jwt', token);
                 console.log( 'Data', data)
-                this.props.getProfile()
         })
            
     }
@@ -96,8 +94,11 @@ export default class CreateBandForm extends Component {
         this.toggle()
     }
 
-    // toProfile = () =>{
-    // }
+    toLogin = () =>{
+        this.props.history.push('/login')
+    }
+
+
     render() {
         return(
             <div>
@@ -233,7 +234,7 @@ export default class CreateBandForm extends Component {
                  <h3>Created!</h3>
             </div>
             <div className='row'>
-                 <Link to="/musician/show"> Go To Profile </Link>
+                 <Link to="/login"> Log In?</Link>
             </div>
          </Grid>
         }

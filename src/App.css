@@ -28,15 +28,6 @@
 }
 
 
-/* body {
-  background-image: url("images/background.jpg") !important;
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
-
-
 .band-display-image{
   width: 100px !important;
 }
@@ -65,7 +56,7 @@ img{ max-width:100%;
 
 body{
   background-color: lightblue !important;
-  padding-top: 90px !important;
+  padding-top: 70px !important;
 }
 
 textarea {
@@ -76,6 +67,13 @@ textarea {
 -moz-box-shadow: -10px 21px 36px -16px rgba(0,0,0,0.42);
 box-shadow: -10px 21px 36px -16px rgba(0,0,0,0.42);}
 
+.paginate{
+  margin-top: 10px;
+  padding: 10px;
+
+}
+
+  
 .navbar-fixed-top {
   position: fixed !important;
   top: 0 !important;
@@ -89,21 +87,13 @@ box-shadow: -10px 21px 36px -16px rgba(0,0,0,0.42);}
   transition: height 0.3s;
 }
 
-.sticky{
-  
-    position: fixed;
-     
-    right: 0;
-     
-    left: 0;
-     
+.sticky{ 
+    position: fixed;    
+    right: 0;  
+    left: 0; 
     z-index: 999;
 }
 
-/* a {
-  color: white !important;
-  font-family: 'Roboto', sans-serif !important;
-} */
 
 .login{
   padding: 100px;
@@ -120,6 +110,11 @@ box-shadow: -10px 21px 36px -16px rgba(0,0,0,0.42);}
   font-family: 'Roboto', sans-serif !important;
   font-size: 15px !important;
 }
+.big-white-text{
+  color: white !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 24px !important;
+}
 
 .coral-text{
   color: coral !important;
@@ -134,13 +129,82 @@ box-shadow: -10px 21px 36px -16px rgba(0,0,0,0.42);}
 }
 
 .modal{
-  background-color: whitesmoke !important;
+  background-color:lightblue !important;
+ color: white;
   text-align: center;
+  width: 400px !important;
 }
-
-
 
 .dimmed.dimmable > .ui.modals.dimmer.visible {
   display: flex !important;
 
+}
+
+.white-header{
+  vertical-align: middle !important;
+  background-color:  #eef7fa;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.musicians-white-header{
+  vertical-align: middle !important;
+  background-color:  #eef7fa;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  padding: 10px;
+  text-align: center;
+}
+
+.listings-white-header{
+  vertical-align: middle !important;
+  background-color:  #eef7fa;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  padding: 10px;
+  text-align: center;
+}
+
+.heading-text{
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 40px !important;
+}
+
+.card-image{
+  height: 170px !important;
+  background-color: white;
+}
+
+.teal{
+  background-color:teal !important;
+}
+
+.teal-header{
+  vertical-align: middle !important;
+  background-color: teal;
+  padding: 10px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.background{
+  background-color:lightblue;
+}
+
+.nav{
+ background-color: rgba(43, 43, 44, 0.966) !important;
+ color: white !important;
+ font-family: 'Roboto', sans-serif !important;
+}
+
+
+
+.nav div:hover { 
+  background-color: #404041!important;
+}
+
+.b :hover { 
+  background-color: lightblue!important;
 }

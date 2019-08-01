@@ -68,10 +68,10 @@ export default class LoginForm extends Component {
             .then(res=>res.json())
             .then(json => {
                 if (json && json.jwt)
-                 {this.saveToken(json.jwt);
+                 {this.saveToken(json.jwt, json.user_id);
                
                 console.log('This is json . user', json.user)
-                this.props.getProfile(json.user.id)
+                this.props.getProfile(json.user_id)
                 this.props.history.push('/' + userType + '/show');} 
             else{
                 window.alert("Your username and/or password is incorrect please try again");
@@ -90,9 +90,10 @@ export default class LoginForm extends Component {
     
    
 
-    saveToken = (token) =>{
-        console.log('token saved login successful', token)
+    saveToken = (token, user_id) =>{
+        let string_id = user_id.toString()
         localStorage.setItem('jwt', token)
+        localStorage.setItem('id', string_id)
         localStorage.setItem('type', this.state.type)
     }
 
@@ -120,13 +121,13 @@ export default class LoginForm extends Component {
                 <p>Not a member? 
               
                 <Modal className='modal' basic trigger={<a className='coral-text'>Sign Up</a>}>
-                    <Modal.Header><h2 className='black-text'>Sign up as a...</h2></Modal.Header>
+                    <Modal.Header><h2 className='black-text'>Select Sign Up Option</h2></Modal.Header>
                     <Modal.Content>
             
                     <Modal.Description>
                         <div className='center-div-items'>
-                        <button className='ui orange huge button' onClick={this.bandSignUp}> Band </button>
-                        <button className='ui orange huge button' onClick={this.musicianSignUp}> Musician </button>
+                        <button className='ui teal huge button' onClick={this.bandSignUp}> Band </button>
+                        <button className='ui teal huge button' onClick={this.musicianSignUp}> Musician </button>
                         </div>
                     </Modal.Description>
                     </Modal.Content>

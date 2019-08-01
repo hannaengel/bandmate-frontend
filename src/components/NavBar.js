@@ -46,7 +46,7 @@ export default class NavBar extends Component {
           <React.Fragment>
           {userType == 'band'?
             <div className='navbar-fixed-top'>
-               <div className="inverted gray ui five fluid item top attached menu ">
+               <div className="inverted gray ui six fluid item top attached menu ">
                 <div className="item">
 
                 <div className="item nav_link">
@@ -66,14 +66,14 @@ export default class NavBar extends Component {
                 <div className='item'>
                 <NavLink to="/bands" >
                 <i className='user icon'></i>
-                  Bands Index
+                  Bands 
                 </NavLink>
                 </div>
 
                 <div className='item'>
                 <NavLink to="/musicians" >
                 <i className='user icon'></i>
-                  Musicians Index
+                  Musicians 
                 </NavLink>
                 </div>
 
@@ -90,14 +90,10 @@ export default class NavBar extends Component {
             </div>
             :
             <div className='navbar-fixed-top'>
-            <div className="inverted gray ui five fluid item top attached menu ">
-             <div className="item">
-
-             <div className="item nav_link">
-             <NavLink to="/login" activeClassName="hurray">
-             <img src={logo} alt='' />
-             </NavLink>
-             </div>
+            <div className="inverted nav ui six top attached item menu ">
+             
+             <div className="item">   
+             <img class="ui small bordered image" src={logo}/>
              </div>
 
              <div className='item'>
@@ -108,31 +104,33 @@ export default class NavBar extends Component {
              </div>
 
              <div className='item'>
-                <NavLink to="/bands" >
-                <i className='user icon'></i>
-                  Bands Index
+                <NavLink to="/indexbands" >
+                <i className='music icon'></i>
+                  Browse Bands 
                 </NavLink>
                 </div>
 
                 <div className='item'>
-                <NavLink to="/musicians" >
-                <i className='user icon'></i>
-                  Musicians Index
+                <NavLink to="/indexmusicians" >
+                <i className='users icon'></i>
+                  Browse Musicians 
                 </NavLink>
                 </div>
 
              <div className='item'>
              <NavLink to="/listings" activeClassName="hurray">
-               Listings
+             <i className='list icon'></i>
+               Browse Listings
              </NavLink>
              </div>
 
                            
           <div className="item">
-             <div onClick={this.logout} className="ui button">Log Out</div>
+          <NavLink to="/login" activeClassName="hurray">
+             <button onClick={this.logout} className="ui button">Log Out</button>
+             </NavLink>
             </div>
          </div>
-
 
          </div>}
           </React.Fragment>

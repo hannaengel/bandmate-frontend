@@ -32,12 +32,14 @@ class App extends Component {
       this_band_logged_in: false,
       this_musicican_logged_in: false
     };
+    this.getProfile(localStorage.getItem('id'))
   }
 
  
   getProfile = (id) => {
      let token = localStorage.getItem("jwt")
      let type = localStorage.getItem("type")
+
      console.log(token)
      if (type == 'band'){
         fetch('http://localhost:3000/api/v1/bands/' + id, {
@@ -72,6 +74,7 @@ class App extends Component {
     })}
   }
 
+  
   setLocalStorage = () =>{
     localStorage.setItem('user_id', this.state.user_id);
     console.log('local storage set', this.state)
@@ -97,10 +100,11 @@ class App extends Component {
         <Route path="/musician/login" component={Facebook}/>
         <Route path="/listings" render={(props)=> <ListingsPageContainer {...props} getProfile={this.getProfile}/>}/>
         <Route path="/musician/show" render={(props)=> <MuscianDisplayContainer {...props} {...this.state}  getProfile={this.getProfile}/>}/>
-        <Route path="/listing/new" component={CreateListingForm}/>
-        <Route path="/musicians/new" component={CreateMusicianForm}/>
-        <Route path="/bands" component={BandsIndex}/>
-        <Route path="/musicians" component={MusiciansIndex}/>
+        <Route path="/listing/new" render={(props)=> <CreateListingForm {...props} {...this.state}/>}/>
+        <Route path="/navbar" render={(props)=> <Navbar {...props} {...this.state}/>}/>
+        <Route path="/musicians/new" render={()=><CreateMusicianForm getProfile={this.getProfile}/>}/>
+        <Route path="/indexbands" component={BandsIndex}/>
+        <Route path="/indexmusicians" component={MusiciansIndex}/>
 
       
       </div>

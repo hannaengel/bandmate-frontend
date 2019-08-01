@@ -13,9 +13,11 @@ export default class BandCard extends Component {
         const band = this.props.band
         return( 
         <React.Fragment>
-            <div class="ui raised card">
+            <div class="ui raised card shadow">
                 <div onClick={this.toBandProfile} class="ui image">
-                    <img src={band.image_url}/>
+                    <div className='card-image'>
+                    <img src={band.image_url} />
+                    </div>
                 </div>
                 <div class="content">
                     <a onClick={this.toBandProfile} class="header">{band.name}</a>

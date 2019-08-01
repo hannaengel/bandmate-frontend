@@ -32,14 +32,13 @@ export default class BandListingsAccordian extends Component {
     }), ()=> console.log(this.state))
 }
 
-  handleContact = listing => {
-    console.log('contact')
-      console.log(listing)
-       let email = listing.band.email
-       let body_text = `Hello ${listing.band.name},%0D%0A%0D%0ASincerely,%0D%0AMusician`
-
-       window.location.href = `mailto:${email}?subject=I Am Interested In Your Posting on BandMate!&body=${body_text}`;
-    }
+handleContact = (e, listing) => {
+  e.preventDefault()
+  console.log(e, listing)
+    let email = this.props.email
+   let body_text = `Hello,%0D%0A%0D%0ASincerely,%0D%0AMusician`;
+    window.location.href = `mailto:${email}?subject=I Am Interested In Your Posting on BandMate!&body=${body_text}`;
+  }
 
     handleDelete = listing => {
       this.props.onDelete(listing)
@@ -94,8 +93,11 @@ export default class BandListingsAccordian extends Component {
                   <p>{`Description:   ${listing.description}`} </p>
 
                   {editView==false? 
-                  <button onClick={()=>{this.handleContact(listing)}} class="ui primary basic button">Contact</button> :
-                    <div>
+
+                  <button onClick={(e)=>{this.handleContact(e, listing)}} class="ui primary basic button">Contact</button> :
+                   
+                   
+                   <div>
                   <button className ='ui submit button' onClick={()=>{this.handleDelete(listing)}}> Delete </button>
                   </div>}
                 </section>

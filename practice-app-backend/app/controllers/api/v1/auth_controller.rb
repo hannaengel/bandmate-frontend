@@ -5,7 +5,7 @@ class Api::V1::AuthController < ApplicationController
       @band = Band.find_by(username: band_login_params[:username])
       if @band && @band.authenticate(band_login_params[:password])
         token = encode_token({ band_id: @band.id})
-        render json: { message: 'In Create AuthController', user: @band, jwt: token }, status: :accepted
+        render json: { message: 'In Create AuthController', user_id: @band.id, jwt: token }, status: :accepted
       else
         render json: { message: 'Invalid username or password' }, status: :unauthorized
       end
@@ -17,7 +17,7 @@ class Api::V1::AuthController < ApplicationController
       if @musician && @musician.authenticate(musician_login_params[:password])
         token = encode_token({ musician_id: @musician.id}) 
         
-        render json: { message: 'In Create AuthController', jwt: token, user: @musician}, status: :accepted
+        render json: { message: 'In Create AuthController', jwt: token, user_id: @musician.id}, status: :accepted
       else
         render json: { message: 'Invalid username or password' }, status: :unauthorized
       end

@@ -81,7 +81,7 @@ export default class BandDisplayContainer extends Component {
                         <Soundcloud soundcloud={soundcloud}/>
                     </div>
                     <div class="six wide column">
-                       <BandListingsDiv onDelete={this.removeListing} editView={this.state.viewMode.editView} band={this.state.band} listings={this.state.band.listings} />
+                       <BandListingsDiv onDelete={this.removeListing} email={this.state.band.email} editView={this.state.viewMode.editView} band={this.state.band} listings={this.state.band.listings} />
                     </div>
                 </Grid.Row>
                     </div>

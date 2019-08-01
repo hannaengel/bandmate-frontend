@@ -47,6 +47,7 @@ export default class MusicianDisplayContainer extends Component {
 
    
 
+
     handleClick = event => {
         event.target.name==='instagram'? 
         window.open(this.state.musician.instagram, '_blank'):
@@ -66,7 +67,7 @@ export default class MusicianDisplayContainer extends Component {
         
             <Grid.Row stretched>
                 <div className="ten wide column">   
-                    <BandPhoto image_url={this.state.musician.image_url}/>
+                    <BandPhoto image_url={image_url}/>
                 </div>
                 <div className="six wide column">
                     <Bio band={this.state.musician} onClick={this.handleClick}/>
@@ -76,10 +77,14 @@ export default class MusicianDisplayContainer extends Component {
              <Grid.Row>
                 <React.Fragment>
                     <div className="eight wide column">
-                        <Spotify spotify={spotify} />
+                        {spotify?
+                        <Spotify spotify={spotify} />:
+                        null}
                         </div>
                         <div className="eight wide column">
-                        <Soundcloud soundcloud={soundcloud} />
+                        {soundcloud? 
+                        <Soundcloud soundcloud={soundcloud} />:
+                        null}
                         </div> 
                  </React.Fragment>
             </Grid.Row>

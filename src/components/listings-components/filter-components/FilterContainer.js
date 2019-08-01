@@ -13,14 +13,14 @@ export default class FilterContainer extends Component {
                 <section>
                 <div class="ui large vertical menu">
 
-                    <a class="active teal item">
+                    <a class="active item">
                         <h4 class="ui header">Filter</h4>
                     </a>
 
-                    <div class="item">
+                    {/* <div class="item">
                          <div onChange={this.handleChange} class="ui input"><input type="text" placeholder="Search..." /></div>
                          
-                     </div>
+                     </div> */}
                      
                     <InstrumentSelector updateInstruments={this.props.updateInstruments}/>
                  </div>

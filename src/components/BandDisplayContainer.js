@@ -8,6 +8,9 @@ import Spotify from './band-show-components/Spotify';
 import BandListingsDiv from './band-show-components/BandListingsDiv';
 import Soundcloud from './band-show-components/Soundcloud';
 import BandLoaderHOC from '../HOC/BandLoaderHOC'
+import InstrumentsSelector from './select-components/InstrumentsSelector.js'
+import GenresSelector from './select-components/GenresSelector'
+
 
 class BandDisplayContainer extends Component {
 
@@ -19,8 +22,8 @@ class BandDisplayContainer extends Component {
             username: '',
             email: '',
             name: '',
-            instruments: '',
-            genre: '',
+            instruments: [],
+            genres: [],
             spotify: '',
             soundcloud: '',
             instagram: '',
@@ -40,6 +43,18 @@ class BandDisplayContainer extends Component {
         if (this.props.this_band_logged_in){
             this.fetchLoggedInBand()
         }
+    }
+
+    updateInstruments = instruments =>{
+        this.setState(prevState => ({
+            band: {...this.state.band, instruments: instruments}
+        }), ()=> console.log(this.state.band))
+    }
+
+    updateGenres = genres =>{
+        this.setState(prevState => ({
+            band: {...this.state.band, genres: genres}
+        }), ()=> console.log(this.state.band))
     }
     
     
@@ -88,7 +103,19 @@ class BandDisplayContainer extends Component {
         this.handleEditClick();
         console.log('inside handle edit submit')
         const url = `http://localhost:3000/api/v1/bands/${this.props.current_user.id}`
-        const band = this.state.band
+        const {id, username, email, name, spotify, soundcloud, instagram, facebook, image_url, listings, bio} = this.state.band
+        let instruments;
+            if (Array.isArray(instruments)){
+            instruments = this.state.band.instruments.join(' ')
+            }else{
+            instruments = this.state.band.instruments
+            }
+            let genres;
+            if (Array.isArray(genres)){
+            genres = this.state.band.genres.join(' ')
+            }else{
+            genres = this.state.band.genres
+            }
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -96,7 +123,21 @@ class BandDisplayContainer extends Component {
             'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify({
-             band: band
+             band: {
+                id: id,
+                username: username,
+                email: email,
+                name: name,
+                instruments: instruments,
+                genres: genres,
+                spotify: spotify,
+                soundcloud: soundcloud,
+                instagram: instagram,
+                facebook: facebook,
+                image_url: image_url,
+                listings:listings,
+                bio: bio
+            }
             })
         })
       .then(res=>res.json())
@@ -193,7 +234,7 @@ class BandDisplayContainer extends Component {
                         <Soundcloud soundcloud={soundcloud}/>
                     </div>
                     <div class="six wide column">
-                       <BandListingsDiv onDelete={this.removeListing} editView={this.state.viewMode.editView} band={this.state.band} listings={this.state.band.listings} />
+                       <BandListingsDiv onDelete={this.removeListing} editView={this.state.viewMode.editView} band={this.state.band} email={this.state.band.email} listings={this.state.band.listings} />
                     </div>
                 </Grid.Row>: 
                 <Grid.Row stretched>
@@ -218,14 +259,25 @@ class BandDisplayContainer extends Component {
                                 Soundcloud </label>
                             <input type="text" placeholder={soundcloud} name='soundcloud' />
                         </Form.Field>
+
+                        <Form.Field id='instruments'>
+                            <label>Instruments</label>
+                          <InstrumentsSelector updateInstruments={this.updateInstruments}/>
+                        </Form.Field> 
+                        <Form.Field id='genres'>
+                            <label>Genres</label>
+                          <GenresSelector updateGenres={this.updateGenres}/>
+                        </Form.Field> 
+
                         </div>
                     <div class="ten wide column">
-                       <BandListingsDiv onDelete={this.removeListing} updateListings={this.updateListings} editView={this.state.viewMode.editView} band={this.state.band} listings={this.state.band.listings} />
+                       <BandListingsDiv onDelete={this.removeListing} updateListings={this.updateListings} editView={this.state.viewMode.editView} email={this.state.band.email} band={this.state.band} listings={this.state.band.listings} />
                     </div>
                      </Grid.Row>}   
                     </div>
                 </div> 
             </form>
+
      </React.Fragment>
         )
     }

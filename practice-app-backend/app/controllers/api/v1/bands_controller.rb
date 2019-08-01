@@ -27,7 +27,11 @@ class Api::V1::BandsController < ApplicationController
     end
 
     def index
-      @bands = Band.all
+      if params[:search]
+      @bands = Band.where('name LIKE ?', "%#{params[:search]}%")
+      else
+        @bands = Band.all
+      end 
       render json: @bands
     end 
 

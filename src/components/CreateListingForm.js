@@ -12,8 +12,8 @@ export default class CreateListingForm extends Component {
             listing: {
                 title: '',
                 description: '',
-                instruments: [],
-                band_id: ''
+                instruments: []
+      
             },  
             created: false
         }
@@ -28,15 +28,15 @@ export default class CreateListingForm extends Component {
 
     handleChange = event => {
         const {name, value} =event.target;
-
         this.setState({
            listing: {...this.state.listing, [name]: value}
-        });
+        }, () => console.log('PARENT STATE', this.state.listing));
     }
 
     createListing= () =>{
         const URL = 'http://localhost:3000/api/v1/listings'
-        const {title, description, band_id} = this.state.listing
+        const {title, description} = this.state.listing
+        const band_id = localStorage.getItem('id')
         const instruments = this.state.listing.instruments.join(' ')
         const headers = {
             method: 'POST',
@@ -83,16 +83,10 @@ export default class CreateListingForm extends Component {
                         <input name='title' placeholder='' required/>
                         </Form.Field>
 
-                        <Form.Field  onChange={this.handleChange}>
-                        <label>Band Id</label>
-                        <input name='band_id' placeholder='' required/>
-                        </Form.Field>
-
+                    
                         <Form.Field id='instruments'>
-    
                             <label>Instruments Needed</label>
                           <InstrumentsSelector updateInstruments={this.updateInstruments}/>
-        
                         </Form.Field> 
 
                         <Form.Field>
