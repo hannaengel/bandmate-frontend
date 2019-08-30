@@ -15,6 +15,7 @@ import CreateMusicianForm  from './components/CreateMusicianForm'
 import MusiciansIndex from './components/MusiciansIndex';
 import Navbar from './components/NavBar'
 import BandsIndex from './components/BandsIndex';
+import TabContainer from './components/TabContainer';
 
 
 
@@ -104,6 +105,7 @@ class App extends Component {
         <Route path="/navbar" render={(props)=> <Navbar {...props} {...this.state}/>}/>
         <Route path="/musicians/new" render={()=><CreateMusicianForm getProfile={this.getProfile}/>}/>
         <Route path="/indexbands" component={BandsIndex}/>
+        <Route path="/practice" component={TabContainer}/>
         <Route path="/indexmusicians" component={MusiciansIndex}/>
 
       

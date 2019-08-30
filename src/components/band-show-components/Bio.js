@@ -12,6 +12,7 @@ export default class Bio extends Component {
         return( 
             <div className="ui segment">
                 <h1>{name}</h1>
+                <div className="ui divider"></div>
                 <h4>Instruments</h4>
                 <p> 
                 {instruments?
@@ -20,7 +21,7 @@ export default class Bio extends Component {
                 </p>
                 <div className="ui divider"></div>
                 <React.Fragment>
-                <h4>Genre</h4>
+                <h4>Genres</h4>
                 {genres?
                 genres:
                 null}
@@ -38,7 +39,7 @@ export default class Bio extends Component {
                         <Icon name='instagram' /> Instagram
                     </Button>
                     
-                    <Button onClick={this.handleClick} position='right' color='facebook'>
+                    <Button name='facebook' onClick={this.handleClick} position='right' color='facebook'>
                         <Icon name='facebook' /> Facebook
                     </Button>
                 </div>

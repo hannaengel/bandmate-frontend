@@ -95,7 +95,9 @@ export default class CreateBandForm extends Component {
             .then(res=>res.json())
             .then(data => {
              const token =  data.jwt
+             const id =  data.band.id.toString()
              localStorage.setItem('jwt', token);
+             localStorage.setItem('id', id);
              console.log( 'Data', data)
              this.props.getProfile()
         })
@@ -127,12 +129,12 @@ export default class CreateBandForm extends Component {
                             <div className='eight wide column'>
                                 <Form.Field onChange={this.handleChange}>
                                      <label>Username</label>
-                                    <input name='username' placeholder='username'/>
+                                    <input name='username' placeholder='username' required/>
                                 </Form.Field>
 
                                 <Form.Field  onChange={this.handleChange}>
                                 <label>Password</label>
-                                <input type="password" name='password' placeholder='password'/>
+                                <input type="password" name='password' placeholder='password' required/>
                                 </Form.Field>   
                             </div>
                             

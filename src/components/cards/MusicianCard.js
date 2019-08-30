@@ -20,10 +20,10 @@ export default class MusicianCard extends Component {
                 </div>
                 </div>
                 <div class="content">
-                    <a onClick={this.toMusicianProfile} class="header">{musician.name}</a>
+                    <a onClick={this.toMusicianProfile} className="header center-div-items">{musician.name}</a>
                 </div>
                 <div class="extra content">
-                   
+                   <p className='center-div-items'>{musician.instruments}</p>
                 </div>
             </div>
             </React.Fragment>

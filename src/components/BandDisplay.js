@@ -52,8 +52,24 @@ export default class BandDisplayContainer extends Component {
             );
      }
 
+
+    handleClick = event => {
+        event.preventDefault()
+        console.log(event.target.name)
+        const name = event.target.name
+        if (name == 'instagram' && this.state.band.instagram!==''){
+            window.open(this.state.band.instagram, '_blank')
+        }
+        if (name == 'facebook' && this.state.band.facebook!==''){
+            window.open(this.state.band.facebook, '_blank')
+        }  
+    }
+
+   
+
+
     render(){
-        const {facebook, instagram, bio, name, email, image_url, spotify, soundcloud} = this.state.band
+        const {image_url, spotify, soundcloud} = this.state.band
 
         return (
             <React.Fragment> 
@@ -65,7 +81,7 @@ export default class BandDisplayContainer extends Component {
 
                 <Grid.Row stretched>
                     <div class="ten wide column">
-                        <BandPhoto image_url={this.state.band.image_url}/>
+                        <BandPhoto image_url={image_url}/>
                     </div>
                     <div class="six wide column">
                         <Bio band={this.state.band} onClick={this.handleClick}/>
@@ -75,10 +91,14 @@ export default class BandDisplayContainer extends Component {
              
                  <Grid.Row stretched>
                     <div class="six wide column">
-                        <Spotify spotify={spotify} />
+                    {spotify?
+                        <Spotify spotify={spotify} />:
+                        <h4 className='white-text'>No Spotify Available</h4>}
                     </div>
                     <div class="four wide column">  
-                        <Soundcloud soundcloud={soundcloud}/>
+                        {soundcloud? 
+                        <Soundcloud soundcloud={soundcloud}/>:
+                        <h4 className='white-text'>No Soundcloud Available</h4>}
                     </div>
                     <div class="six wide column">
                        <BandListingsDiv onDelete={this.removeListing} email={this.state.band.email} editView={this.state.viewMode.editView} band={this.state.band} listings={this.state.band.listings} />

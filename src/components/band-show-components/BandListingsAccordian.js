@@ -88,14 +88,16 @@ handleContact = (e, listing) => {
               </Accordion.Title>
               <Accordion.Content active={activeIndex === index}>
                 <section>
-                  <p> {listing.band} </p>
-                  <p>{`Instruments:   ${listing.instruments}`} </p>
-                  <p>{`Description:   ${listing.description}`} </p>
+                  
+                   <h5>Instruments </h5>
+                  <p>{listing.instruments} </p>
+                  <h5>Description </h5>
+                  <p>{listing.description} </p>
 
                   {editView==false? 
 
-                  <button onClick={(e)=>{this.handleContact(e, listing)}} class="ui primary basic button">Contact</button> :
-                   
+                  <button onClick={(e)=>{this.handleContact(e, listing)}} class="ui primary button">Contact</button> :
+  
                    
                    <div>
                   <button className ='ui submit button' onClick={()=>{this.handleDelete(listing)}}> Delete </button>
@@ -125,7 +127,7 @@ handleContact = (e, listing) => {
                   </section>
                 </Accordion.Content>
                 <Button onClick={() => {this.handleDelete(listing)}}>Delete</Button>
-                <Button onClick={(e) => {this.updateListing(e,listing)}}>Commit Changes</Button>
+                
                 </Form>
         )})}
            </Accordion>

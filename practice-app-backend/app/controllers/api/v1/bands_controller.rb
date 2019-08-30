@@ -48,10 +48,10 @@ class Api::V1::BandsController < ApplicationController
 
     private
     def band_params
-      params.require(:band).permit(:id, :username, :password, :email, :name, :instruments, :genres, :spotify, :soundcloud, :instagram, :facebook, :image_url, :band)
+      params.require(:band).permit(:id, :username, :password, :email, :name, :instruments, :genres, :spotify, :soundcloud, :bio, :instagram, :facebook, :image_url, :band)
     end
     def band_create_params
-      params.require(:band).permit(:id, :username, :password, :email, :name, :instruments, :genres, :spotify, :soundcloud, :instagram, :facebook, :image_url, :band)
+      params.require(:band).permit(:id, :username, :password, :email, :name, :instruments, :genres, :spotify, :soundcloud, :bio, :instagram, :facebook, :image_url, :band)
     end
   end
   

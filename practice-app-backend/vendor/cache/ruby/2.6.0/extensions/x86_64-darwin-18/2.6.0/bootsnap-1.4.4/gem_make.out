@@ -1,0 +1,15 @@
+current directory: /Users/hannaengel/Development/projects/practice-app/practice-app-backend/vendor/cache/ruby/2.6.0/gems/bootsnap-1.4.4/ext/bootsnap
+/Users/hannaengel/.rvm/rubies/ruby-2.6.1/bin/ruby -I /Users/hannaengel/.rvm/rubies/ruby-2.6.1/lib/ruby/site_ruby/2.6.0 -r ./siteconf20190813-29651-1jnn7eq.rb extconf.rb
+creating Makefile
+
+current directory: /Users/hannaengel/Development/projects/practice-app/practice-app-backend/vendor/cache/ruby/2.6.0/gems/bootsnap-1.4.4/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/hannaengel/Development/projects/practice-app/practice-app-backend/vendor/cache/ruby/2.6.0/gems/bootsnap-1.4.4/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/hannaengel/Development/projects/practice-app/practice-app-backend/vendor/cache/ruby/2.6.0/gems/bootsnap-1.4.4/ext/bootsnap
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 bootsnap.bundle ./.gem.20190813-29651-rh40r0/bootsnap

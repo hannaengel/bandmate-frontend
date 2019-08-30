@@ -34,15 +34,26 @@ export default class InstrumentSelector extends Component {
                             <option value="accordian">Accordian</option>
                             <option value="banjo">Banjo</option>
                             <option value="bass">Bass</option>
-                            <option value="cello">Accordian</option>
+                            <option value="backup-vocals">Backup Vocals</option>
+                            <option value="cello">Cello</option>
+                            <option value="clarinet">Clarinet</option>
+                            <option value="dj">DJ</option>
+                            <option value="flute">Flute</option>
+                            <option value="harp">Harp</option>
                             <option value="keyboard">Keyboard</option>
+                            <option value="piano">Piano</option>
                             <option value="percussion">Percussion</option>
                             <option value="strings">Strings</option>
+                            <option value="synths">Synths</option>
+                            <option value="trombone">Trombone</option>
+                            <option value="trumpet">Trumpet</option>
+                            <option value="ukulele">Ukulele</option>
+                            <option value="violin">Violin</option>
                             <option value="voice">Voice</option>
                             </select>
                             <div>
                             {this.state.instruments.map((instrument) => {
-                                return <button value={instrument} onClick={this.removeInstrument}>{instrument}</button>
+                                return <button className="small blue ui button" value={instrument} onClick={this.removeInstrument}><i class="delete icon"></i>{instrument}</button>
                              })}
                             </div>
             </div>

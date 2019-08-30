@@ -84,8 +84,7 @@ class BandDisplayContainer extends Component {
 
     handleEditClick = () =>{
         this.setState(prevState => ({
-            viewMode: {editView: !prevState.viewMode.editView}
-        }))
+            viewMode: {editView: !prevState.viewMode.editView}}))
     }
 
     handleChange = event => {
@@ -139,10 +138,11 @@ class BandDisplayContainer extends Component {
                 bio: bio
             }
             })
+         })
+        .then(res=>res.json())
+        .then(json => {
         })
-      .then(res=>res.json())
-      .then(json => {
-      })
+      this.fetchLoggedInBand()
     }
 
     removeListing = (listing) => {
@@ -210,7 +210,7 @@ class BandDisplayContainer extends Component {
                         </Form.Field>
                         <Form.Field  onChange={this.handleChange}>
                             <label>Bio</label>
-                            <input bio='bio' placeholder={bio}/>
+                            <input name='bio' placeholder={bio}/>
                         </Form.Field>
                         <Form.Field  onChange={this.handleChange}>
                             <label>Email Contact</label>

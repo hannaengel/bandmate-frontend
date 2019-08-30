@@ -17,8 +17,7 @@ export default class NavBar extends Component {
 
     logout() {
       console.log('logout is hit!')
-      localStorage.setItem('jwt', '')
-      localStorage.setItem('band_id', '')
+      localStorage.clear()
       window.location.replace("https://localhost:3001/login");
       return false
       }
@@ -52,10 +51,10 @@ export default class NavBar extends Component {
              <img class="ui small bordered image" src={logo}/>
              </div>
 
-                <div className='item'>
+                <div className='item coral'>
                 <NavLink to="/band/show" >
-                <i className='user icon'></i>
-                  Band Profile
+                <i className='users icon coral'></i>
+                  My Band Profile
                 </NavLink>
                 </div>
 
@@ -92,10 +91,10 @@ export default class NavBar extends Component {
              <img class="ui small bordered image" src={logo}/>
              </div>
 
-             <div className='item'>
+             <div className='item coral'>
              <NavLink to="/musician/show" activeClassName="hurray">
-             <i className='user icon'></i>
-             My Profile
+             <i className='user icon teal-icon'></i>
+             My Musician Profile
              </NavLink>
              </div>
 

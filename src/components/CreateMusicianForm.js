@@ -51,6 +51,11 @@ export default class CreateBandForm extends Component {
             musician: {...this.state.musician, genres: genres}
          }, ()=> console.log('PARENT STATE', this.state));
     }
+
+
+
+
+    
     
     createMusician = () =>{
         console.log('IN CREATE MUSICIAN STATE', this.state)
@@ -81,8 +86,11 @@ export default class CreateBandForm extends Component {
             .then(res=>res.json())
             .then(data => {
                 const token =  data.jwt
+                const id =  data.musician.id.toString()
                 localStorage.setItem('jwt', token);
+                localStorage.setItem('id', id);
                 console.log( 'Data', data)
+                this.props.getProfile(id)
         })
            
     }
@@ -119,12 +127,12 @@ export default class CreateBandForm extends Component {
                             <React.Fragment>
                                 <Form.Field onChange={this.handleChange}>
                                 <label>Username</label>
-                                <input name='username' placeholder='username'/>
+                                <input name='username' placeholder='username' required/>
                                 </Form.Field>
 
                                 <Form.Field  onChange={this.handleChange}>
                                 <label>Password</label>
-                                <input type="password" name='password' placeholder='password'/>
+                                <input type="password" name='password' placeholder='password' required/>
                                 </Form.Field>
                             </React.Fragment>
                         </div>
@@ -151,7 +159,7 @@ export default class CreateBandForm extends Component {
                         <div>
                             <Form.Field  onChange={this.handleChange}>
                             <label> Display Name</label>
-                            <input name='name' placeholder='name'/>
+                            <input name='name' placeholder='name' required/>
                             </Form.Field>
 
                             <Form.Field  onChange={this.handleChange}>

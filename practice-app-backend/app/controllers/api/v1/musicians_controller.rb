@@ -20,18 +20,18 @@ class Api::V1::MusiciansController < ApplicationController
            render json: { error: 'failed to create musician' }, status: :not_acceptable
          end
       end
-  
+      
       def index
-        if params[:search]
-        @musicians = Musician.where('name LIKE ?', "%#{params[:search]}%")
-        else
-          @musicians = Musician.all
-        end 
+        # if params[:search]
+        # @musicians = Musician.where('name LIKE ?', "%#{params[:search]}%")
+        # elsif params[:instruments]
+        #   @musicians = Musician.all
+        # end 
+        @musicians = Musician.all
         render json: @musicians
       end 
   
       def update
-      
         @musician = Musician.find(musician_params[:id])
         if @musician.update(musician_params)
           render json: @musician

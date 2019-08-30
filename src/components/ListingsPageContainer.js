@@ -122,13 +122,15 @@ export default class ListingsPageContainer extends Component {
             <NavBar />
            
             {this.state.view_one==true?
-                <React.Fragment>
-                    <button onClick={this.returnToListings} className="ui labeled icon button">
-                        <i class="left chevron icon"></i>
-                        Back
-                    </button>
-                <BandDisplay seeBand={this.state.id} />
-                </React.Fragment>  
+                 <React.Fragment>
+                 <div className='teal-header' onClick={this.returnToListings}>
+                 <button  className="ui labeled icon teal button">
+                     <i class="left chevron icon"></i>
+                     Go Back
+                 </button>
+                 </div>
+             <BandDisplay seeBand={this.state.id} />
+             </React.Fragment>
                 :
                 <React.Fragment>
                 <div className='listings-white-header shadow'>

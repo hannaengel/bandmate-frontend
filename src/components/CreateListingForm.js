@@ -70,14 +70,15 @@ export default class CreateListingForm extends Component {
         return(
             <div>
                 <NavBar />
-                <div className='create-listing-form'>
+                <div className='create-listing-form shadow'>
     
                  {this.state.created===false?
                     <Form onSubmit={this.handleSubmit} className='ui-form'>   
                         <h1 className="ui center aligned icon header dividing">
                         Create Listing
-                        </h1>
-           
+                        </h1> 
+                    
+                
                         <Form.Field onChange={this.handleChange}>
                         <label>Title</label>
                         <input name='title' placeholder='' required/>
@@ -95,12 +96,14 @@ export default class CreateListingForm extends Component {
                         </Form.Field>
 
                         <Form.Field className='center-div-items'>
-                        <input className='ui submit orange button' type='submit' value='Create Listing' />
+                        <input className='ui submit teal button' type='submit' value='Create Listing' />
                         </Form.Field>
                         </Form>:
                         <div>
-                            <h2>Your listing was posted! </h2>
+                            <h2 className='ui header centered'>Your listing was posted! </h2>
+                            <div className='center-div-items'>
                             <button onClick={this.toggle} className='ui orange button'> Create Another Listing </button>
+                            </div>
                         </div>}
                 </div>
             </div>

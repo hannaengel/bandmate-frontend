@@ -40,8 +40,8 @@ export default class ListingAccordian extends Component {
                 <section>
                 <h2 className='ui dividing header'>{listing.band.name}</h2>
                 <img class="ui medium image" src={listing.band.image_url}></img>
-                <p>{`Instruments:   ${listing.instruments}`} </p>
-                <p>{`Description:   ${listing.description}`} </p>
+                <p><h4>Instruments</h4>   {listing.instruments} </p>
+                <p><h4>Description</h4>   {listing.description} </p>
                 <button onClick={(e)=>{this.handleContact(e, listing)}} className="ui primary button">
                   <i className='envelope icon'></i>Contact</button>
                   <button onClick={()=>{this.displayBand(listing.band.id)}} className="ui primary button">

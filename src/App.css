@@ -44,6 +44,12 @@ img{ max-width:100%;
 }
 
 .create-listing-form{
+  margin: 100px;
+  padding: 50px;
+  background-color: #cde7f0;;
+}
+
+.create-listing-form{
   padding: 50px !important;
   padding-left: 200px !important;
   padding-right: 200px !important;
@@ -122,6 +128,19 @@ box-shadow: -10px 21px 36px -16px rgba(0,0,0,0.42);}
   font-size: 15px !important;
 }
 
+.teal-text{
+  color: teal !important;
+  
+}
+
+.coral{
+  color: coral !important;
+}
+
+.teal-icon{
+  color: rgb(255, 229, 113) !important;
+}
+
 .black-text{
   color: black !important;
   text-align: center;
@@ -151,7 +170,6 @@ box-shadow: -10px 21px 36px -16px rgba(0,0,0,0.42);}
 
 .search-names{
   vertical-align: middle !important;
-  background-color:  #grey;
   margin-bottom: 20px;
   margin-top: 10px;
   padding: 10px;
@@ -182,7 +200,7 @@ box-shadow: -10px 21px 36px -16px rgba(0,0,0,0.42);}
 }
 
 .card-image{
-  height: 170px !important;
+  height: 210px !important;
   background-color: white;
 }
 
@@ -216,4 +234,17 @@ box-shadow: -10px 21px 36px -16px rgba(0,0,0,0.42);}
 
 .b :hover { 
   background-color: lightblue!important;
+}
+
+.make-fit{
+  background-color: lightblue !important;
+}
+
+h5{
+  font-weight: bold !important;
+  color: rgb(18, 120, 151) !important;
+}
+
+.toggle-tab{
+  background-color: blue !important;
 }
