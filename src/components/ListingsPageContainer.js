@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ListingAccordian from '/Users/hannaengel/Development/projects/practice-app/src/components/listings-components/ListingAccordian.js'
+import ListingAccordian from '../listings-components/ListingAccordian.js'
 import FilterContainer from './listings-components/filter-components/FilterContainer.js'
 import { Header, Menu , Button} from 'semantic-ui-react'
 import NavBar from './NavBar.js'

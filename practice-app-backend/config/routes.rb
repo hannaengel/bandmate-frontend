@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+     root 'auth#create_band'
       get 'bands/profile', to: 'bands#profile'
       get 'musicians/profile', to: 'musicians#profile'
       resources :listings, only: [:create, :index, :update, :show, :destroy]

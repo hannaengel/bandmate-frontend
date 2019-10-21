@@ -99,6 +99,7 @@ module Sprockets
     config.assets.prefix      = "/assets"
     config.assets.manifest    = nil
     config.assets.quiet       = false
+    config.assets.enabled = false
 
     initializer :set_default_precompile do |app|
       if using_sprockets4?
