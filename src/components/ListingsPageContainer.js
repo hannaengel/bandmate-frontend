@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import ListingAccordian from '../listings-components/ListingAccordian.js'
+import ListingAccordian from 'src/components/listings-components/ListingAccordian.js'
 import FilterContainer from './listings-components/filter-components/FilterContainer.js'
 import { Header, Menu , Button} from 'semantic-ui-react'
 import NavBar from './NavBar.js'
 import BandDisplay from './BandDisplay.js'
 export default class ListingsPageContainer extends Component {
-
 
 
     constructor() {
